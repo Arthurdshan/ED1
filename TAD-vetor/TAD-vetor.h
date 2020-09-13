@@ -16,8 +16,8 @@ typedef int DataType;
 #define LENGTH 5
 //#define POSICAO_INVALIDA
 
-/*prototipos*/
-//parte 1
+/*prototypes*/
+//part 1
 Vetor* vet_new();
 Boolean vet_insertEnd(Vetor* v, DataType element);
 Boolean vet_insert(Vetor* v, DataType element, int index);
@@ -30,7 +30,7 @@ int vet_position(Vetor* v, DataType element);
 void vet_print(Vetor* v);
 void vet_free(Vetor* v);
 Boolean vet_toString(Vetor* v,char* enderecoString);
-//vetor parte 2 
+//vetor part 2 
 void vetor_double(Vetor *v);
 void vetor_remove_verify(Vetor *v);
 void vetor_shift(Vetor *v, DataType index);
@@ -41,16 +41,16 @@ void vet_bubblesort(Vetor* v);
 void vet_selectionsort(Vetor* v);
 void trocarPosicaoValores( int *posicaoA, int *posicaoB);
 int vet_binarysearch(Vetor* v, DataType element);
-//vetor parte 3
+//vetor part 3
 Vetor* vet_import(char* nomeArquivo);
-Boolean vet_exportar(Vetor* v, char* nomeArquivo);
-//vetor parte 4
-Vetor* vet_criarAleatorio(int tam);
-Vetor* vet_criarAscendente(int tam);
-Vetor* vet_criarDescendente(int tam);
-Vetor* vet_criarAscendenteParcial(int tam, int percentual);
+Boolean vet_export(Vetor* v, char* archivename);
+//vetor part 4
+Vetor* vet_newrandom(int tam);
+Vetor* vet_newupward(int tam);
+Vetor* vet_newdownward(int tam);
+Vetor* vet_partialupward(int tam, int percentage);
 
-/*implementação*/
+
 Vetor* vet_new(){
   Vetor* v1= (Vetor*) malloc(sizeof(Vetor));
   v1->vetor = (DataType*) calloc(LENGTH, sizeof(DataType)); 
@@ -238,7 +238,7 @@ int vet_position(Vetor* v, DataType element){
   int z = 0, x;
   for(int i = 0; i < v->size; i++){
     if(v->vetor[i] == element && z == 0){
-      z++;
+      z = 1;
       x = i;
     }
   }
@@ -281,15 +281,15 @@ Vetor* vet_clone(Vetor* v){
 
 void vet_bubblesort(Vetor* v){
   DataType aux;
-	int houvetroca = 1, i, j;
-	for(j=v->size-1; j>=1 && houvetroca==1; j--){
-		houvetroca=0; 
-		for(i=0; i<j; i++){
+	int hadc = 1, i, j;
+	for(j = v->size-1; j >= 1 && hadc == 1; j--){
+		hadc = 0; 
+		for(i = 0; i < j; i++){
 				if(v->vetor[i]>v->vetor[i+1]){
-					aux=v->vetor[i];
-					v->vetor[i]=v->vetor[i+1];
-					v->vetor[i+1]=aux;
-					houvetroca=1;
+					aux = v->vetor[i];
+					v->vetor[i] = v->vetor[i+1];
+					v->vetor[i+1] = aux;
+					hadc = 1;
 			}
 		}
 	}
@@ -329,25 +329,25 @@ void vet_insertionsort(Vetor* v){
 int vet_binarysearch(Vetor* v, DataType element){
   int inf = 0;
   int sup = v->size-1;
-  DataType meio;
+  DataType mid;
   while (inf <= sup){
-    meio = (inf + sup)/2;
-    if (element == v->vetor[meio])
-      return meio;
+    mid = (inf + sup)/2;
+    if (element == v->vetor[mid])
+      return mid;
   if (element < v->vetor[element])
-    sup = meio-1;
+    sup = mid-1;
   else
-    inf = meio+1;
+    inf = mid+1;
   }
   return -1;
 }
 
-Vetor* vet_import(char* nomeArquivo){
+Vetor* vet_import(char* archivename){
 
   Vetor* v = vet_new();
   FILE *arq;
 
-  arq = fopen(nomeArquivo, "r+");
+  arq = fopen(archivename, "r+");
   if (arq != NULL) {
     printf("arquivo aberto.\n");
   }
@@ -364,10 +364,10 @@ Vetor* vet_import(char* nomeArquivo){
   return v;
 }
 
-Boolean vet_exportar(Vetor* v, char* nomeArquivo){
+Boolean vet_export(Vetor* v, char* archivename){
   FILE *arq;
 
-  arq = fopen(nomeArquivo, "w+");
+  arq = fopen(archivename, "w+");
   if (arq != NULL) {
     printf("Arquivo aberto.\n");
   }
@@ -382,7 +382,7 @@ Boolean vet_exportar(Vetor* v, char* nomeArquivo){
   return true;
 }
 
-Vetor* vet_criarAleatorio(int tam){
+Vetor* vet_newrandom(int tam){
   Vetor* v = (Vetor*) malloc(sizeof(Vetor));
   v->vetor = (DataType*) calloc(tam, sizeof(DataType));
 
@@ -395,14 +395,14 @@ Vetor* vet_criarAleatorio(int tam){
   return v;
 }
 
-Vetor* vet_criarAscendente(int tam){
-  Vetor* v = vet_criarAleatorio(tam);
+Vetor* vet_newupward(int tam){
+  Vetor* v = vet_newrandom(tam);
   vet_insertionsort(v);
   return v;
 }
 
-Vetor* vet_criarDescendente(int tam){
-  Vetor* v = vet_criarAleatorio(tam);
+Vetor* vet_newdownward(int tam){
+  Vetor* v = vet_newrandom(tam);
 
   for (int i = 0; i < tam - 1; i++){
     for (int j = i; j < tam - 1; j++){
@@ -416,8 +416,8 @@ Vetor* vet_criarDescendente(int tam){
 return v; 
 }
 
-Vetor* vet_criarAscendenteParcial(int tam, int percentual){
-  Vetor* v = vet_criarAleatorio(tam);
+Vetor* vet_partialupward(int tam, int percentual){
+  Vetor* v = vet_newrandom(tam);
     DataType aux;
     int i, j;
     for (i = 1; i < (float)v->size*percentual/100; i++){ 
