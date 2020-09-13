@@ -75,7 +75,7 @@ void teste3(){
   Vetor* v3 = vet_import(nomeArquivo1);
   vet_print(v3);
   char nomeArquivo2[] = "arquivo_entrada1.txt";
-  if(vet_exportar(v3, nomeArquivo2)){
+  if(vet_export(v3, nomeArquivo2)){
       printf("Valores passados com sucesso para o arquivo\n");
   }
   else printf("Valores não importados\n");
@@ -85,10 +85,10 @@ void teste3(){
 
 void teste4(){
   printf("!!!!!!!!!!!PARTE 4!!!!!!!!!\n");
-  Vetor* v4 = vet_criarAleatorio(10);
-  Vetor* v5 = vet_criarAscendente(10);
-  Vetor* v6 = vet_criarDescendente(10);
-  Vetor* v7 = vet_criarAscendenteParcial(10, 50);
+  Vetor* v4 = vet_newrandom(10);
+  Vetor* v5 = vet_newupward(10);
+  Vetor* v6 = vet_newdownward(10);
+  Vetor* v7 = vet_partialupward(10, 50);
   vet_print(v4);
   vet_print(v5);
   vet_print(v6);
