@@ -42,7 +42,7 @@ void vet_selectionsort(Vetor* v);
 void trocarPosicaoValores( int *posicaoA, int *posicaoB);
 int vet_binarysearch(Vetor* v, DataType element);
 //vetor part 3
-Vetor* vet_import(char* nomeArquivo);
+Vetor* vet_import(char* archivename);
 Boolean vet_export(Vetor* v, char* archivename);
 //vetor part 4
 Vetor* vet_newrandom(int tam);
