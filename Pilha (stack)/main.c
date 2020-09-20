@@ -3,9 +3,10 @@
 //#include "PilhaContigua.h"
 #include "PilhaEncadeada.h"
 
-int main(){
 
-	Pilha* p = pilha_criar();
+int main(){
+  
+  Pilha* p = pilha_criar();
 
   pilha_empilhar(p, 1);
   pilha_empilhar(p, 2);
@@ -21,7 +22,10 @@ int main(){
   
   TipoElemento saida2;
   pilha_topo(p, &saida2);
-
+  
+  TipoElemento tam;
+  tam = pilha_tamanho(p);
+  
   Pilha* pc = pilha_clone(p);
   printf("clone da pilha\n");
   pilha_imprimir(pc);
