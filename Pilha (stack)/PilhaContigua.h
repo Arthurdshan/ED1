@@ -50,6 +50,7 @@ void pilha_destruir(Pilha* p){
 
 Boolean pilha_empilhar(Pilha* p, TipoElemento elemento){
   if(p == NULL) return false;
+  if(p->qtde == p->tam) return false;
   p->vetor[p->qtde] = elemento;
   p->qtde++;
   return true;
@@ -74,8 +75,8 @@ void pilha_imprimir(Pilha *p){
   if (p == NULL) return;
   
   for(int i = 0; i < p->qtde; i++){
-    if(i == 0) printf("%d", p->vetor[i]);
-    else printf(" -> %d", p->vetor[i]);
+    if(i == 0) printf("%d -> ", p->vetor[i]);
+    else printf("%d -> ", p->vetor[i]);
   }
   printf("NULL\n");
 }
@@ -95,6 +96,9 @@ Pilha* pilha_clone(Pilha* p){
 }
 
 void pilha_inverter(Pilha* p){
+  
+  if(p == NULL) return;
+
   TipoElemento* inverso = (TipoElemento*) calloc(p->tam, sizeof(TipoElemento));
   for(int i = p->qtde - 1, j = 0; i >= 0; i--, j++){
     inverso[j] = p->vetor[i];
