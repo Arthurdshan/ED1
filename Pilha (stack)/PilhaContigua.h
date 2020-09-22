@@ -78,7 +78,6 @@ void pilha_imprimir(Pilha *p){
     if(i == 0) printf("%d -> ", p->vetor[i]);
     else printf("%d -> ", p->vetor[i]);
   }
-  printf("NULL\n");
 }
 
 int pilha_tamanho(Pilha* p){
