@@ -75,8 +75,9 @@ void pilha_imprimir(Pilha *p){
   if (p == NULL) return;
   
   for(int i = 0; i < p->qtde; i++){
-    printf("%d -> ", p->vetor[i]);
     if(i == p->qtde-1) printf("%d\n", p->vetor[i]);
+    else printf("%d -> ", p->vetor[i]);
+    
   }
 }
 
