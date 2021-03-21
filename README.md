@@ -6,9 +6,8 @@ Enjoy! :)
 ## Task list
 - Update Sentinel list 
 
-## **Data Structures List:**
+## Data Structures List:
 
-### Linear Data Structure:
 - Priority Queue
 - Linked Stack
 - Static Stack
