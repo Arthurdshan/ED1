@@ -1,8 +1,6 @@
-//Arthur Dae Sung Han RA:2135507
-
 #include<stdio.h>
 #include<stdlib.h>
-#include "TAD-vetor.h"
+#include "ADT.h"
 
 void teste1();
 void teste2();

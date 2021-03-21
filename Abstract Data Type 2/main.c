@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include "TAD-vetor.h"
+#include "ADT.h"
 
 void teste1(){
   printf("!!!!!!!!!!Parte 1!!!!!!!!!\n\n");

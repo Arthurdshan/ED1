@@ -2,7 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef enum boolean{false=0, true=1} Boolean;
+typedef enum boolean{FALSE, TRUE} Boolean;
 typedef int TipoElemento;
 
 /**************************************
@@ -62,9 +62,9 @@ void fila_destruir(Fila* f){
 }
 
 Boolean fila_inserir(Fila* f, TipoElemento elemento){
-  if(f == NULL) return false;
+  if(f == NULL) return FALSE;
   No* no = (No*) malloc (sizeof(No*));
-  if(no == NULL) return false;
+  if(no == NULL) return FALSE;
   no->dado = elemento;
   no->prox = NULL;
 
@@ -74,24 +74,24 @@ Boolean fila_inserir(Fila* f, TipoElemento elemento){
     f->fim->prox = no;
   f->fim = no;
   f->qtde++;
-  return true;
+  return TRUE;
 }
 
 Boolean fila_remover(Fila* f, TipoElemento* saida){
-  if(fila_vazia(f)) return false;
+  if(fila_vazia(f)) return FALSE;
   No* no = f->inicio;
   *saida = no->dado;
   f->inicio = f->inicio->prox;
   if(f->inicio == NULL) f->fim = NULL;
   free(no);
   f->qtde--;
-  return true;
+  return TRUE;
 }
 
 Boolean fila_primeiro(Fila* f, TipoElemento* saida){
-  if(fila_vazia(f)) return false;
+  if(fila_vazia(f)) return FALSE;
   *saida = f->inicio->dado;
-  return true;
+  return TRUE;
 }
 
 int fila_tamanho(Fila* f){
@@ -100,9 +100,9 @@ return f->qtde;
 }
 
 Boolean fila_vazia(Fila* f){
-  if(f == NULL) return true;
-  if(f->inicio == NULL) return true;
-  return false;
+  if(f == NULL) return TRUE;
+  if(f->inicio == NULL) return TRUE;
+  return FALSE;
 }
 
 void fila_imprimir(Fila *f){
@@ -148,11 +148,11 @@ void fila_inverter(Fila* f){
 }
 
 Boolean fila_inserirTodos(Fila* f, TipoElemento* vetor, int tamVetor){
-  if (f == NULL) return false;
+  if (f == NULL) return FALSE;
 
   for(int i = 0; i < tamVetor; i++){
     int aux = vetor[i];
     fila_inserir(f, aux);
   }
-  return true;
+  return TRUE;
 }
