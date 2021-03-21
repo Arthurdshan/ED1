@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-//#include "StaticStack.h"
+// #include "StaticStack.h"
 #include "LinkedStack.h"
 
 int main(){

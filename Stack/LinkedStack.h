@@ -35,15 +35,13 @@ Stack* createStack(){
 }
 
 void destroyStack(Stack* p){
-
-  if(p == NULL) return;
-
+  Node* temp = p->top;
   Node* aux;
-  while(p->top != NULL){
-    aux = p->top;
-    p->top = p->top->next;
-    free(aux);
-  }
+    for(int i = 0; i < p->size; i++){
+      aux = temp;
+      temp = temp->next;
+      free(aux);
+    }
   free(p);
 }
 
@@ -52,9 +50,7 @@ Boolean pushElement(Stack* p, DataType value){
   if(p == NULL) return FALSE;
   
   Node* node = (Node*) malloc(sizeof(Node));
-  if(node == NULL) return FALSE;
   node->value = value;
-
   node->next = p->top;
   p->size++;
   p->top = node;
@@ -75,11 +71,12 @@ Boolean popElement(Stack* p, DataType* exit){
 
 void print(Stack* p){
   
-  Node* teste = p->top;
-  while(teste != NULL){
-    printf("%d -> ", teste->value);
-    teste = teste->next;
+  Node* aux = p->top;
+  for(int i = 0; i < p->size; i++){
+    printf("%d -> ", aux->value);
+    aux = aux->next;
   }
+  free(aux);
   printf("NULL\n");
 }
 

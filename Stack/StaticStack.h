@@ -32,7 +32,7 @@ Stack* createStack(){
   return p1;
 }
 
-void createStack(Stack* p){
+void destroyStack(Stack* p){
   free(p->vector);
   free(p);
 }
