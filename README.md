@@ -4,8 +4,7 @@ Collection of my data my data structures implementations.
 Enjoy! :)
 
 ## Task list
-- Update Queue and Sentinel list 
-- Create Sparse Matrix
+- Update Sentinel list 
 
 ## **Data Structures List:**
 
@@ -15,7 +14,7 @@ Enjoy! :)
 - Static Stack
 - Circular Queue
 - Linked Queue
-- Sentinel List
+- Sparse Matrix
 
 ## Contribution
 You can fork this repo and use it to study! If you find any issue feel free to report it.
