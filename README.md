@@ -1,5 +1,5 @@
 # DATA STRUCTURE 1
-Collection of my data my data structures implementations.
+Collection of my data structures implementations.
 
 Enjoy! :)
 
