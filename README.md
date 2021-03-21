@@ -1,4 +1,4 @@
-# ED1
+# DATA STRUCTURE 1
 Collection of generic data structures implementations.
 # Task list
 - Update Queue and Sentinel list 
