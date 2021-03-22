@@ -23,7 +23,7 @@ typedef struct {
 * PROTOTYPES
 **************************************/
 List* createList();
-void lista_destruir(List* l);
+void destroyList(List* l);
 Boolean insertOnLastPosition(List* l, DataType value);
 Boolean insertNewElement(List* l, DataType value, int index);
 Boolean removeFromIndex(List* l, int index, DataType* adress);
@@ -62,7 +62,7 @@ void print(List* l){
   printf("]\n\n");
 }
 
-void lista_destruir(List* l){
+void destroyList(List* l){
   Node* aux = l->sentinel->prox;
   Node* aux2;
   for(int i = 0; i <= l->qtde; i++){

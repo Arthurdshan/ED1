@@ -62,7 +62,7 @@ void destroyQueue(Queue* f){
 
 Boolean insertElement(Queue* f, DataType value){
   if(f == NULL) return FALSE;
-  Node* node = (Node*) malloc (sizeof(Node*));
+  Node* node = (Node*) malloc (sizeof(Node));
   if(node == NULL) return FALSE;
   node->value = value;
   node->prox = NULL;
