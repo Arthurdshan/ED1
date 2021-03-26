@@ -1,41 +1,4 @@
-#include<stdio.h>
-#include<stdlib.h>
-
-typedef enum boolean{FALSE, TRUE} Boolean;
-typedef int DataType;
-
-/**************************************
-* DATA
-**************************************/
-typedef struct node{
-	DataType data;
-	struct node* prox;
-}Node;
-
-typedef struct {
-	Node* start;
-	Node* end;
-	int size;
-}Queue;
-
-/**************************************
-* PROTOTYPES
-**************************************/
-
-Queue* createQueue();
-void destroyQueue(Queue* q);
-Boolean insertElement(Queue* q, DataType data);
-Boolean removeElement(Queue* q, DataType* saida);
-Boolean firstElement(Queue* q, DataType* saida); 
-int getSize(Queue* q);
-void print(Queue* q);
-void revertQueue(Queue* q);
-Boolean insertAllElements(Queue* q, DataType* vetor, int lengthVector);
-Boolean isEmpty(Queue* q);
-/**************************************
-* IMPLEMENTATION
-**************************************/
-// Desenvolva as funções
+#include "LinkedQueue.h"
 
 Queue* createQueue(){
   Queue *q = (Queue*) malloc(sizeof(Queue));
@@ -60,9 +23,9 @@ void destroyQueue(Queue* q){
 }
 
 Boolean insertElement(Queue* q, DataType data){
-  if(q == NULL) return FALSE;
+  if(q == NULL) return false;
   Node* node = (Node*) malloc (sizeof(Node));
-  if(node == NULL) return FALSE;
+  if(node == NULL) return false;
   node->data = data;
   node->prox = NULL;
 
@@ -70,24 +33,24 @@ Boolean insertElement(Queue* q, DataType data){
   else q->end->prox = node;
   q->end = node;
   q->size++;
-  return TRUE;
+  return true;
 }
 
 Boolean removeElement(Queue* q, DataType* saida){
-  if(isEmpty(q)) return FALSE;
+  if(isEmpty(q)) return false;
   Node* node = q->start;
   *saida = node->data;
   q->start = q->start->prox;
   if(q->start == NULL) q->end = NULL;
   free(node);
   q->size--;
-  return TRUE;
+  return true;
 }
 
 Boolean firstElement(Queue* q, DataType* saida){
-  if(isEmpty(q)) return FALSE;
+  if(isEmpty(q)) return false;
   *saida = q->start->data;
-  return TRUE;
+  return true;
 }
 
 int getSize(Queue* q){
@@ -96,9 +59,9 @@ return q->size;
 }
 
 Boolean isEmpty(Queue* q){
-  if(q == NULL) return TRUE;
-  if(q->start == NULL) return TRUE;
-  return FALSE;
+  if(q == NULL) return true;
+  if(q->start == NULL) return true;
+  return false;
 }
 
 void print(Queue *q){
@@ -125,11 +88,11 @@ void revertQueue(Queue* q){
 }
 
 Boolean insertAllElements(Queue* q, DataType* vetor, int size){
-  if (q == NULL) return FALSE;
+  if (q == NULL) return false;
 
   for(int i = 0; i < size; i++){
     int aux = vetor[i];
     insertElement(q, aux);
   }
-  return TRUE;
+  return true;
 }

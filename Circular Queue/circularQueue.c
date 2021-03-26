@@ -1,41 +1,4 @@
-#include<stdio.h>
-#include<stdlib.h>
-#define MAX 8
-
-typedef enum boolean{FALSE, TRUE} Boolean;
-typedef int DataType;
-
-/**************************************
-* DATA
-**************************************/
-
-typedef struct {
-	DataType* vetor;
-	int length;
-	int start;
-	int end;
-	int size;
-}Queue;
-
-/**************************************
-* PROTOTYPES
-**************************************/
-
-Queue* createQueue();
-void destroyQueue(Queue* q);
-Boolean insertElement(Queue* q, DataType data);
-Boolean removeElement(Queue* q, DataType* saida); 
-Boolean firstElement(Queue* q, DataType* saida); 
-Boolean isEmpty(Queue* q);
-int getSize(Queue* q);
-void print(Queue* q);
-Queue* cloneQueue(Queue* q);
-void revertQueue(Queue* q);
-Boolean insertAllElements(Queue* q, DataType* vetor, int lengthVector);
-
-/**************************************
-* IMPLEMENTATIONS
-**************************************/
+#include "circularQueue.h"
 
 Queue* createQueue(){
 
@@ -66,36 +29,36 @@ void destroyQueue(Queue* q){
 }
 
 Boolean insertElement(Queue* q, DataType data){
-  if(q == NULL || q->size == MAX) return FALSE;
+  if(q == NULL || q->size == MAX) return false;
   
   else{
   q->vetor[q->end] = data;
   q->end = (q->end+1) % MAX;
   q->size++;
-  return TRUE;
+  return true;
   }
 }
 
 Boolean removeElement(Queue* q, DataType* saida){
-  if(q == NULL || isEmpty(q)) return FALSE;
+  if(q == NULL || isEmpty(q)) return false;
   
   *saida = q->vetor[q->start%q->length]; 
   q->start = (q->start+1) % MAX;
   q->size--;
-  return TRUE;
+  return true;
 }
 
 Boolean firstElement(Queue* q, DataType* saida){
-  if(isEmpty(q)) return FALSE;
+  if(isEmpty(q)) return false;
   else{
     *saida = q->vetor[q->start];
-    return TRUE;
+    return true;
   }
 }
 
 Boolean isEmpty(Queue* q){
-  if(q->size == 0) return TRUE;
-  else return FALSE;
+  if(q->size == 0) return true;
+  else return false;
 }
 
 int getSize(Queue* q){
@@ -125,5 +88,5 @@ Boolean insertAllElements(Queue* q, DataType* vetor, int lengthVector){
   for(int i = 0; i < lengthVector; i++){
     insertElement(q, vetor[i]);
   }
-  return TRUE;
+  return true;
 }

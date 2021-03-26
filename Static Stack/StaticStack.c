@@ -1,28 +1,4 @@
-#pragma once 
-
-#include <stdio.h>
-#include <stdlib.h>
-#define N 5
-
-typedef enum boolean{FALSE, TRUE} Boolean;
-typedef int DataType;
-
-typedef struct {
-	DataType* vector;
-	int length;
-	int size;
-}Stack;
-
-Stack* createStack();
-void destroyStack(Stack* s);
-Boolean pushElement(Stack* s, DataType data);
-Boolean popElement(Stack* s, DataType* saida);
-Boolean topElement(Stack* s, DataType* saida);
-void print(Stack* s);
-int getSize(Stack* s);
-Stack* cloneStack(Stack* s);
-void revertStack(Stack* s);
-Boolean pushAllElements(Stack* s, DataType* vector, int lengthvector);
+#include "StaticStack.h"
 
 Stack* createStack(){
   Stack* p1= (Stack*) malloc(sizeof(Stack));
@@ -38,26 +14,26 @@ void destroyStack(Stack* s){
 }
 
 Boolean pushElement(Stack* s, DataType data){
-  if(s == NULL) return FALSE;
-  if(s->size == s->length) return FALSE;
+  if(s == NULL) return false;
+  if(s->size == s->length) return false;
   s->vector[s->size] = data;
   s->size++;
-  return TRUE;
+  return true;
 }
 
 Boolean popElement(Stack* s, DataType* saida){
-  if(s == NULL || s->size == 0) return FALSE;
+  if(s == NULL || s->size == 0) return false;
 
   *saida = s->vector[s->size - 1];
   s->size--;
-  return TRUE;
+  return true;
   }
 
 Boolean topElement(Stack* s, DataType* saida){
-  if (s == NULL) return FALSE;
+  if (s == NULL) return false;
 
   saida = &s->vector[s->size];
-  return TRUE; 
+  return true; 
 }
 
 void print(Stack *s){
@@ -96,10 +72,10 @@ void revertStack(Stack* s){
 }
 
 Boolean pushAllElements(Stack* s, DataType* vector, int lengthvector){
-  if (s == NULL|| lengthvector <= 0) return FALSE;
+  if (s == NULL|| lengthvector <= 0) return false;
 
   for(int i = 0; i < lengthvector; i++){
     pushElement(s, vector[i]);
   }
-  return TRUE;
+  return true;
 }

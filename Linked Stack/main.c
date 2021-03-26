@@ -1,4 +1,3 @@
-// #include "StaticStack.h"
 #include "LinkedStack.h"
 
 int main(){
