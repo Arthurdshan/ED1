@@ -19,7 +19,7 @@ int main(){
   printf("cloned queue:\n");  
   priorityQueue* qc = cloneQueue(q);
   print(qc);       
-  printf("fila 2:\n");    
+  printf("second queue:\n");    
   DataType v[6] = {3,6,5,1,7};        
   priorityQueue* q2 = createQueue();
   insertInQueue(q2, 10);                        

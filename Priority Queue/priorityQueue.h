@@ -16,7 +16,7 @@ typedef struct {
 
 priorityQueue* createQueue();
 void destroyQueue(priorityQueue* q);
-Boolean insertInQueue(priorityQueue* q, DataType elemento);
+Boolean insertInQueue(priorityQueue* q, DataType value);
 Boolean removeFromQueue(priorityQueue* q, DataType* saida); 
 Boolean isEmpty(priorityQueue* q);
 int getSize(priorityQueue* q);
@@ -24,7 +24,7 @@ void print(priorityQueue* q);
 priorityQueue* cloneQueue(priorityQueue* q);
 Boolean insertAllElements(priorityQueue* q, DataType* array, int size);
 void promoveElement(priorityQueue* q, int filho);
-void downElement(priorityQueue* q, int pai);
+void downElement(priorityQueue* q, int root);
 void switchElements(DataType* a, DataType* b);
 int root(int j);
 int rightLeaf(int i);
@@ -41,11 +41,11 @@ priorityQueue* createQueue(){
   return q;
 }
 
-Boolean insertInQueue(priorityQueue* q, DataType elemento){
+Boolean insertInQueue(priorityQueue* q, DataType value){
   if(q == NULL) return FALSE;
   if(q->size == q->length) return FALSE;
 
-  q->array[q->size] = elemento;
+  q->array[q->size] = value;
   promoveElement(q,q->size);
   q->size++;
   return TRUE;
@@ -106,15 +106,15 @@ Boolean removeFromQueue(priorityQueue* q, DataType* saida){
   return TRUE;
 }
 
-void downElement(priorityQueue* q, int pos){
-  if(leftLeaf(pos) < q->size){
-    int biggerElement = leftLeaf(pos);
-    int filhoaDireita = (rightLeaf(pos) < q->size ? 1 : 0);
-    if(filhoaDireita && q->array[rightLeaf(pos)] > q->array[leftLeaf(pos)])
-      biggerElement = rightLeaf(pos);
+void downElement(priorityQueue* q, int root){
+  if(leftLeaf(root) < q->size){
+    int biggerElement = leftLeaf(root);
+    int rightleaf = (rightLeaf(root) < q->size ? 1 : 0);
+    if(rightleaf && q->array[rightLeaf(root)] > q->array[leftLeaf(root)])
+      biggerElement = rightLeaf(root);
     
-    if(q->array[pos] < q->array[biggerElement]){
-      switchElements(&q->array[pos],&q->array[biggerElement]);
+    if(q->array[root] < q->array[biggerElement]){
+      switchElements(&q->array[root],&q->array[biggerElement]);
       downElement(q, biggerElement);
     }
   }
