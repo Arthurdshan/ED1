@@ -1,4 +1,3 @@
-//FilaEncadeada.h
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -24,87 +23,87 @@ typedef struct {
 **************************************/
 
 Queue* createQueue();
-void destroyQueue(Queue* f);
-Boolean insertElement(Queue* f, DataType value);
-Boolean removeElement(Queue* f, DataType* saida);
-Boolean firstElement(Queue* f, DataType* saida); 
-int getSize(Queue* f);
-void print(Queue* f);
-void revertQueue(Queue* f);
-Boolean insertAllElements(Queue* f, DataType* vetor, int lengthVector);
-Boolean isEmpty(Queue* f);
+void destroyQueue(Queue* q);
+Boolean insertElement(Queue* q, DataType value);
+Boolean removeElement(Queue* q, DataType* saida);
+Boolean firstElement(Queue* q, DataType* saida); 
+int getSize(Queue* q);
+void print(Queue* q);
+void revertQueue(Queue* q);
+Boolean insertAllElements(Queue* q, DataType* vetor, int lengthVector);
+Boolean isEmpty(Queue* q);
 /**************************************
 * IMPLEMENTATION
 **************************************/
 // Desenvolva as funções
 
 Queue* createQueue(){
-  Queue *f = (Queue*) malloc(sizeof(Queue));
-  if(f != NULL) {
-    f->start = NULL;
-    f->end = NULL;
-    f->size = 0;
+  Queue *q = (Queue*) malloc(sizeof(Queue));
+  if(q != NULL) {
+    q->start = NULL;
+    q->end = NULL;
+    q->size = 0;
   }
-  return f;
+  return q;
 }
 
-void destroyQueue(Queue* f){
-  if(f != NULL){
+void destroyQueue(Queue* q){
+  if(q != NULL){
     Node* aux;
-    while(f->start != NULL){
-      aux = f->start;
-      f->start = f->start->prox;
+    while(q->start != NULL){
+      aux = q->start;
+      q->start = q->start->prox;
       free(aux);
     }
-    free(f);
+    free(q);
   }
 }
 
-Boolean insertElement(Queue* f, DataType value){
-  if(f == NULL) return FALSE;
+Boolean insertElement(Queue* q, DataType value){
+  if(q == NULL) return FALSE;
   Node* node = (Node*) malloc (sizeof(Node));
   if(node == NULL) return FALSE;
   node->value = value;
   node->prox = NULL;
 
-  if(isEmpty(f)) f->start = node;
-  else f->end->prox = node;
-  f->end = node;
-  f->size++;
+  if(isEmpty(q)) q->start = node;
+  else q->end->prox = node;
+  q->end = node;
+  q->size++;
   return TRUE;
 }
 
-Boolean removeElement(Queue* f, DataType* saida){
-  if(isEmpty(f)) return FALSE;
-  Node* node = f->start;
+Boolean removeElement(Queue* q, DataType* saida){
+  if(isEmpty(q)) return FALSE;
+  Node* node = q->start;
   *saida = node->value;
-  f->start = f->start->prox;
-  if(f->start == NULL) f->end = NULL;
+  q->start = q->start->prox;
+  if(q->start == NULL) q->end = NULL;
   free(node);
-  f->size--;
+  q->size--;
   return TRUE;
 }
 
-Boolean firstElement(Queue* f, DataType* saida){
-  if(isEmpty(f)) return FALSE;
-  *saida = f->start->value;
+Boolean firstElement(Queue* q, DataType* saida){
+  if(isEmpty(q)) return FALSE;
+  *saida = q->start->value;
   return TRUE;
 }
 
-int getSize(Queue* f){
-  if(f == NULL) return 0;
-return f->size;
+int getSize(Queue* q){
+  if(q == NULL) return 0;
+return q->size;
 }
 
-Boolean isEmpty(Queue* f){
-  if(f == NULL) return TRUE;
-  if(f->start == NULL) return TRUE;
+Boolean isEmpty(Queue* q){
+  if(q == NULL) return TRUE;
+  if(q->start == NULL) return TRUE;
   return FALSE;
 }
 
-void print(Queue *f){
-  Node* aux = f->start;
-  for(int i = 0; i < f->size; i++){
+void print(Queue *q){
+  Node* aux = q->start;
+  for(int i = 0; i < q->size; i++){
     printf("%d -> ",aux->value);
     aux = aux->prox;
   }
@@ -112,9 +111,9 @@ void print(Queue *f){
 }
 
 
-void revertQueue(Queue* f){
+void revertQueue(Queue* q){
   Node* aux = NULL; 
-  Node* aux1 = f->start; 
+  Node* aux1 = q->start; 
   Node* aux2 = NULL; 
   while (aux1 != NULL) { 
     aux2 = aux1->prox; 
@@ -122,15 +121,15 @@ void revertQueue(Queue* f){
     aux = aux1; 
     aux1 = aux2; 
   } 
-  f->start = aux; 
+  q->start = aux; 
 }
 
-Boolean insertAllElements(Queue* f, DataType* vetor, int size){
-  if (f == NULL) return FALSE;
+Boolean insertAllElements(Queue* q, DataType* vetor, int size){
+  if (q == NULL) return FALSE;
 
   for(int i = 0; i < size; i++){
     int aux = vetor[i];
-    insertElement(f, aux);
+    insertElement(q, aux);
   }
   return TRUE;
 }

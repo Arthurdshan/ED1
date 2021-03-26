@@ -28,8 +28,8 @@ Boolean addValueToMatrix(Matrix* m, int row, int column, int value);
 int acessMatrixPosition(Matrix* m, int row, int column);
 void print(Matrix* m);
 Matrix* destroyMatrix(Matrix** m);
-void insertColumn(int row, int column, Node* no, Matrix* m);
-void insertRow(int row,int column , Node* no, Matrix* m);
+void insertColumn(int row, int column, Node* node, Matrix* m);
+void insertRow(int row,int column , Node* node, Matrix* m);
 Node* findNodeColumn(Node* aux,int row, Node* sentinel);
 Node* findNodeRow(Node* aux,int column, Node* sentinel);
 
@@ -125,46 +125,46 @@ Node* findNodeRow(Node* aux,int column, Node* sentinel){
     return aux;
 }
 
-void insertColumn(int row, int column, Node* no, Matrix* m){
+void insertColumn(int row, int column, Node* node, Matrix* m){
     Node* sentinel = m->columns[column];   
     Node* aux = findNodeColumn(sentinel->down, row, sentinel);
     
     if(aux != sentinel && row == aux->row){
-        aux->value = no->value;
-        free(no);
+        aux->value = node->value;
+        free(node);
     }else{
-        no->down = aux;
-        no->up = aux->up;
-        aux->up->down = no;
-        aux->up = no;
+        node->down = aux;
+        node->up = aux->up;
+        aux->up->down = node;
+        aux->up = node;
     }
 
 }
 
-void insertRow(int row,int column, Node* no, Matrix* m){
+void insertRow(int row,int column, Node* node, Matrix* m){
     Node* sentinel = m->rows[row];
     Node* aux = findNodeRow(sentinel->right,column, sentinel);
 
     if(aux != sentinel && aux->column == column){
-        aux->value = no->value;
-        free(no);
+        aux->value = node->value;
+        free(node);
     }else{
-        no->right = aux;
-        no->left = aux->left;            
-        aux->left->right = no;
-        aux->left = no;
+        node->right = aux;
+        node->left = aux->left;            
+        aux->left->right = node;
+        aux->left = node;
     }
 }
 
 Boolean addValueToMatrix(Matrix* m, int row, int column, int value){
     if(m == NULL) return FALSE;
     
-    Node* no = (Node*) malloc(sizeof(Node));
-    no->value = value;
-    no->column = column;
-    no->row = row;
-    insertColumn(row,column, no, m);
-    insertRow(row,column, no, m);
+    Node* node = (Node*) malloc(sizeof(Node));
+    node->value = value;
+    node->column = column;
+    node->row = row;
+    insertColumn(row,column, node, m);
+    insertRow(row,column, node, m);
 
     return TRUE;
 }

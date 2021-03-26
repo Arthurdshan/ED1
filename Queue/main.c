@@ -1,3 +1,4 @@
+// Just uncomment what type of queue you want to test ;-)
 // #include "circularQueue.h"
 #include "LinkedQueue.h"
 
@@ -5,14 +6,14 @@ int main(){
 
   int removed;
 
-  Queue* f = createQueue();     
-  print(f);          
-  insertElement(f, 1);                       
-  insertElement(f, 2);                       
-  insertElement(f, 3);                        
-  insertElement(f, 4); 
-  print(f);
-  removeElement(f, &removed);              
-  print(f);
+  Queue* q = createQueue();     
+  print(q);          
+  insertElement(q, 1);                       
+  insertElement(q, 2);                       
+  insertElement(q, 3);                        
+  insertElement(q, 4); 
+  print(q);
+  removeElement(q, &removed);              
+  print(q);
 
 }

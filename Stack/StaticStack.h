@@ -14,15 +14,15 @@ typedef struct {
 }Stack;
 
 Stack* createStack();
-void destroyStack(Stack* p);
-Boolean pushElement(Stack* p, DataType value);
-Boolean popElement(Stack* p, DataType* saida);
-Boolean topElement(Stack* p, DataType* saida);
-void print(Stack* p);
-int getSize(Stack* p);
-Stack* cloneStack(Stack* p);
-void revertStack(Stack* p);
-Boolean pushAllElements(Stack* p, DataType* vector, int lengthvector);
+void destroyStack(Stack* s);
+Boolean pushElement(Stack* s, DataType value);
+Boolean popElement(Stack* s, DataType* saida);
+Boolean topElement(Stack* s, DataType* saida);
+void print(Stack* s);
+int getSize(Stack* s);
+Stack* cloneStack(Stack* s);
+void revertStack(Stack* s);
+Boolean pushAllElements(Stack* s, DataType* vector, int lengthvector);
 
 Stack* createStack(){
   Stack* p1= (Stack*) malloc(sizeof(Stack));
@@ -32,74 +32,74 @@ Stack* createStack(){
   return p1;
 }
 
-void destroyStack(Stack* p){
-  free(p->vector);
-  free(p);
+void destroyStack(Stack* s){
+  free(s->vector);
+  free(s);
 }
 
-Boolean pushElement(Stack* p, DataType value){
-  if(p == NULL) return FALSE;
-  if(p->size == p->length) return FALSE;
-  p->vector[p->size] = value;
-  p->size++;
+Boolean pushElement(Stack* s, DataType value){
+  if(s == NULL) return FALSE;
+  if(s->size == s->length) return FALSE;
+  s->vector[s->size] = value;
+  s->size++;
   return TRUE;
 }
 
-Boolean popElement(Stack* p, DataType* saida){
-  if(p == NULL || p->size == 0) return FALSE;
+Boolean popElement(Stack* s, DataType* saida){
+  if(s == NULL || s->size == 0) return FALSE;
 
-  *saida = p->vector[p->size - 1];
-  p->size--;
+  *saida = s->vector[s->size - 1];
+  s->size--;
   return TRUE;
   }
 
-Boolean topElement(Stack* p, DataType* saida){
-  if (p == NULL) return FALSE;
+Boolean topElement(Stack* s, DataType* saida){
+  if (s == NULL) return FALSE;
 
-  saida = &p->vector[p->size];
+  saida = &s->vector[s->size];
   return TRUE; 
 }
 
-void print(Stack *p){
-  if (p == NULL) return;
+void print(Stack *s){
+  if (s == NULL) return;
   
   for(int i = 0; i < 5; i++){
-    if(i == p->size-1) printf("%d\n", p->vector[i]);
-    else printf("%d -> ", p->vector[i]);
+    if(i == s->size-1) printf("%d\n", s->vector[i]);
+    else printf("%d -> ", s->vector[i]);
   }
 }
 
-int getSize(Stack* p){
-  return p->size;
+int getSize(Stack* s){
+  return s->size;
 }
 
-Stack* cloneStack(Stack* p){
+Stack* cloneStack(Stack* s){
   Stack* p1= createStack();
-  p1->length = p->length;
-  p1->size = p->size;
-  for(int i = 0; i < p->size; i++){
-    p1->vector[i] = p->vector[i];
+  p1->length = s->length;
+  p1->size = s->size;
+  for(int i = 0; i < s->size; i++){
+    p1->vector[i] = s->vector[i];
   }
   return p1;
 }
 
-void revertStack(Stack* p){
+void revertStack(Stack* s){
   
-  if(p == NULL) return;
+  if(s == NULL) return;
 
-  DataType* inverso = (DataType*) calloc(p->length, sizeof(DataType));
-  for(int i = p->size - 1, j = 0; i >= 0; i--, j++){
-    inverso[j] = p->vector[i];
+  DataType* inverso = (DataType*) calloc(s->length, sizeof(DataType));
+  for(int i = s->size - 1, j = 0; i >= 0; i--, j++){
+    inverso[j] = s->vector[i];
   }
-  free(p->vector);
-  p->vector = inverso;
+  free(s->vector);
+  s->vector = inverso;
 }
 
-Boolean pushAllElements(Stack* p, DataType* vector, int lengthvector){
-  if (p == NULL|| lengthvector <= 0) return FALSE;
+Boolean pushAllElements(Stack* s, DataType* vector, int lengthvector){
+  if (s == NULL|| lengthvector <= 0) return FALSE;
 
   for(int i = 0; i < lengthvector; i++){
-    pushElement(p, vector[i]);
+    pushElement(s, vector[i]);
   }
   return TRUE;
 }

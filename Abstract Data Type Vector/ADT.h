@@ -9,82 +9,81 @@ typedef struct{
   DataType* vetor;
   int size;
   int length; 
-}Vetor;
+}Vector;
 
-typedef enum boolean{false=0, true=1} Boolean;
+typedef enum boolean{FALSE, TRUE} Boolean;
 typedef int DataType;
 #define LENGTH 5
-//#define POSICAO_INVALIDA
 
-/*prototypes*/
-//part 1
-Vetor* vet_new();
-Boolean vet_insertEnd(Vetor* v, DataType element);
-Boolean vet_insert(Vetor* v, DataType element, int index);
-Boolean vet_substitute(Vetor* v, int index, DataType newElement);
-Boolean vet_removePosition(Vetor* v, int index, DataType* ptr);
-int vet_removeElement(Vetor* v, DataType element);
-int vet_size(Vetor* v);
-Boolean vet_element(Vetor* v, int index, DataType* exit);
-int vet_position(Vetor* v, DataType element);
-void vet_print(Vetor* v);
-void vet_free(Vetor* v);
-Boolean vet_toString(Vetor* v,char* enderecoString);
-//vetor part 2 
-void vetor_double(Vetor *v);
-void vetor_remove_verify(Vetor *v);
-void vetor_shift(Vetor *v, DataType index);
-void vetor_add_verify(Vetor *v);
-void vetor_reduce(Vetor *v);
-Vetor* vet_clone(Vetor* v);
-void vet_bubblesort(Vetor* v);
-void vet_selectionsort(Vetor* v);
+/**
+ * ALL FUNCTION PROTOTYPES!
+*/
+Vector* vet_new(); 
+Boolean vet_insertEnd(Vector* v, DataType element);
+Boolean vet_insert(Vector* v, DataType element, int index);
+Boolean vet_substitute(Vector* v, int index, DataType newElement);
+Boolean vet_removePosition(Vector* v, int index, DataType* ptr);
+int vet_removeElement(Vector* v, DataType element);
+int vet_size(Vector* v);
+Boolean vet_element(Vector* v, int index, DataType* exit);
+int vet_position(Vector* v, DataType element);
+void vet_print(Vector* v);
+void vet_free(Vector* v);
+Boolean vet_toString(Vector* v,char* enderecoString);
+void vetor_double(Vector *v);
+void vetor_remove_verify(Vector *v);
+void vetor_shift(Vector *v, DataType index);
+void vetor_add_verify(Vector *v);
+void vetor_reduce(Vector *v);
+Vector* vet_clone(Vector* v);
+void vet_bubblesort(Vector* v);
+void vet_selectionsort(Vector* v);
 void trocarPosicaoValores( int *posicaoA, int *posicaoB);
-int vet_binarysearch(Vetor* v, DataType element);
-//vetor part 3
-Vetor* vet_import(char* archivename);
-Boolean vet_export(Vetor* v, char* archivename);
-//vetor part 4
-Vetor* vet_newrandom(int tam);
-Vetor* vet_newupward(int tam);
-Vetor* vet_newdownward(int tam);
-Vetor* vet_partialupward(int tam, int percentage);
+int vet_binarysearch(Vector* v, DataType element);
+Vector* vet_import(char* archivename);
+Boolean vet_export(Vector* v, char* archivename);
+Vector* vet_newrandom(int tam);
+Vector* vet_newupward(int tam);
+Vector* vet_newdownward(int tam);
+Vector* vet_partialupward(int tam, int percentage);
 
-
-Vetor* vet_new(){
-  Vetor* v1= (Vetor*) malloc(sizeof(Vetor));
+/**
+ * IMPLEMENTATIONS!
+*/
+Vector* vet_new(){
+  Vector* v1= (Vector*) malloc(sizeof(Vector));
   v1->vetor = (DataType*) calloc(LENGTH, sizeof(DataType)); 
   v1->size = 0;
   v1->length = LENGTH;
   return v1;
 }
 
-Boolean vet_insertEnd(Vetor* v, DataType element) {
-  if (v == NULL) return false;
+Boolean vet_insertEnd(Vector* v, DataType element) {
+  if (v == NULL) return FALSE;
 
   v->vetor[v->size++] = element;
-  return true;
+  return TRUE;
 }
 
-void vet_free(Vetor* v) {
+void vet_free(Vector* v) {
   free(v);
 }
 
-void vetor_add_verify(Vetor *v){
-  printf("***************************\n");
-  printf("*testando se pode aumentar*\n");
-  printf("***************************\n");
+void vetor_add_verify(Vector *v){
+  printf("**************************\n");
+  printf("*checking vector size....*\n");
+  printf("**************************\n");
   if(v->size == v->length) vetor_double(v);
 }
 
-void vetor_double(Vetor *v){
-  DataType* aux = calloc(v->length*2, sizeof(DataType));
+void vetor_double(Vector *v){
+  DataType* aux =(DataType*) calloc(v->length*2, sizeof(DataType));
   for(int i = 0; i < v->size; i++){
     aux[i] = v->vetor[i];
   }
-  printf("*********************\n");
-  printf("*vetor foi aumentado*\n");
-  printf("*********************\n");
+  printf("**********************\n");
+  printf("*vector was increased*\n");
+  printf("**********************\n");
   v->length *= 2;
   
   free(v->vetor);
@@ -92,9 +91,9 @@ void vetor_double(Vetor *v){
   
 }
 
-void vetor_remove_verify(Vetor *v){
+void vetor_remove_verify(Vector *v){
   printf("**************************\n");
-  printf("*testando se pode reduzir*\n");
+  printf("*checking if can reduce..*\n");
   printf("**************************\n");
   if((float)v->size/v->length < 0.25){
     vetor_reduce(v);
@@ -103,20 +102,20 @@ void vetor_remove_verify(Vetor *v){
   }
 }
 
-void vetor_reduce(Vetor *v){
+void vetor_reduce(Vector *v){
   DataType *v1 = (DataType*) calloc(v->length/2,sizeof(DataType));
   for(int i = 0; i < v->size; i++){
     v1[i] = v->vetor[i];
   }
   printf("********************\n");
-  printf("vetor foi reduzido.\n");
+  printf("vector was reduced.*\n");
   printf("********************\n");
   free(v->vetor);
   v->vetor = v1;
   v->length /= 2;
 }
 
-void vet_print(Vetor* v) {
+void vet_print(Vector* v) {
   if (v == NULL) return;
 
   int i;
@@ -129,7 +128,7 @@ void vet_print(Vetor* v) {
   printf("\n");
 }
 
-void vetor_shift(Vetor *v, DataType index){
+void vetor_shift(Vector *v, DataType index){
     DataType *v1 = (DataType*) calloc(v->length,sizeof(DataType));
     for(int i = 0, j = 0; i < v->size; i++, j++){
         if(i == index){
@@ -144,43 +143,43 @@ void vetor_shift(Vetor *v, DataType index){
     v->vetor = v1;
 }
 
-Boolean vet_insert(Vetor* v, DataType element, int index) {
+Boolean vet_insert(Vector* v, DataType element, int index) {
     
     vetor_add_verify(v);
 
-    if(index > v->size || v == NULL) return false;
+    if(index > v->size || v == NULL) return FALSE;
 
         else if(index < 0){
           vetor_shift(v,index + v->size);
           v->vetor[index + v->size] = element;
           v->size++;
-          return true;
+          return TRUE;
         }else{
           vetor_shift(v,index);
           v->vetor[index] = element;
           v->size++;
-          return true;
+          return TRUE;
         }
 }
 
-Boolean vet_substitute(Vetor* v, int index, DataType newElement){
-  if(index > v->size || v == NULL) return false;
+Boolean vet_substitute(Vector* v, int index, DataType newElement){
+  if(index > v->size || v == NULL) return FALSE;
 
   else if(index < 0){
     v->vetor[index + v->size] = newElement;
-    return true;
+    return TRUE;
   }
   else{
     v->vetor[index] = newElement;
-    return true;
+    return TRUE;
   }
 }
 
-Boolean vet_removePosition(Vetor* v, int index, DataType* ptr){
+Boolean vet_removePosition(Vector* v, int index, DataType* ptr){
   vetor_remove_verify(v);
   if(index > v->size || v == NULL){
     *ptr = 0;
-    return false;
+    return FALSE;
   } 
   else {
     if(index < 0){
@@ -188,19 +187,19 @@ Boolean vet_removePosition(Vetor* v, int index, DataType* ptr){
       for (int i = index; i < v->size - 1; i++) 
       v->vetor[i] = v->vetor[i+1];
     v->size--;
-    return true;
+    return TRUE;
     }
     else{
     ptr = &v->vetor[index];
     for (int i = index; i < v->size - 1; i++) 
       v->vetor[i] = v->vetor[i+1];
     v->size--;
-    return true;
+    return TRUE;
     }
   }
 }
 
-int vet_removeElement(Vetor* v, DataType element){
+int vet_removeElement(Vector* v, DataType element){
   vetor_remove_verify(v);
   int z = 0;
   int value;
@@ -216,25 +215,25 @@ int vet_removeElement(Vetor* v, DataType element){
   return value;
 }
 
-int vet_size(Vetor* v){
+int vet_size(Vector* v){
   return v->size;
 }
 
-Boolean vet_element(Vetor* v, int index, DataType* exit){
-  if(v == NULL || index > v->size) return false;
+Boolean vet_element(Vector* v, int index, DataType* exit){
+  if(v == NULL || index > v->size) return FALSE;
 
   else if(index < 0){
     exit = &v->vetor[index+v->size];
-    return true;  
+    return TRUE;  
   }
   else{
     exit = &v->vetor[index];
-    return true;
+    return TRUE;
   }
 }
 
 
-int vet_position(Vetor* v, DataType element){ 
+int vet_position(Vector* v, DataType element){ 
   int z = 0, x;
   for(int i = 0; i < v->size; i++){
     if(v->vetor[i] == element && z == 0){
@@ -242,11 +241,10 @@ int vet_position(Vetor* v, DataType element){
       x = i;
     }
   }
-  //if(x == NULL) return POSICAO_INVALIDA;
   return x; 
 }
 
-Boolean vet_toString(Vetor* v, char* adString){
+Boolean vet_toString(Vector* v, char* adString){
   int pos = 0;
   int i;
   char temp[20];
@@ -264,12 +262,12 @@ Boolean vet_toString(Vetor* v, char* adString){
   }
   adString[pos++] = ']';
   adString[pos] = '\0';
-  return true;
+  return TRUE;
 }
 
-Vetor* vet_clone(Vetor* v){
+Vector* vet_clone(Vector* v){
 
-  Vetor* copy = (Vetor*) malloc(sizeof(Vetor));
+  Vector* copy = (Vector*) malloc(sizeof(Vector));
   copy->vetor = (DataType*) calloc(v->length, sizeof(DataType));
   for(int i = 0; i < v->size; i++){
     copy->vetor[i] = v->vetor[i];
@@ -279,7 +277,7 @@ Vetor* vet_clone(Vetor* v){
   return copy;
 }
 
-void vet_bubblesort(Vetor* v){
+void vet_bubblesort(Vector* v){
   DataType aux;
 	int hadc = 1, i, j;
 	for(j = v->size-1; j >= 1 && hadc == 1; j--){
@@ -295,7 +293,7 @@ void vet_bubblesort(Vetor* v){
 	}
 }
 
-void vet_selectionsort(Vetor* v){ 
+void vet_selectionsort(Vector* v){ 
   DataType aux;
   int i, j, min;
   for (i = 0; i < v->size-1; i++){
@@ -312,7 +310,7 @@ void vet_selectionsort(Vetor* v){
   }
 }
 
-void vet_insertionsort(Vetor* v){ 
+void vet_insertionsort(Vector* v){ 
     DataType aux;
     int i, j; 
     for (i = 1; i < v->size; i++){ 
@@ -326,25 +324,22 @@ void vet_insertionsort(Vetor* v){
     } 
 } 
 
-int vet_binarysearch(Vetor* v, DataType element){
+int vet_binarysearch(Vector* v, DataType element){
   int inf = 0;
   int sup = v->size-1;
   DataType mid;
   while (inf <= sup){
     mid = (inf + sup)/2;
-    if (element == v->vetor[mid])
-      return mid;
-  if (element < v->vetor[element])
-    sup = mid-1;
-  else
-    inf = mid+1;
+    if (element == v->vetor[mid]) return mid;
+  if (element < v->vetor[element]) sup = mid-1;
+  else inf = mid+1;
   }
   return -1;
 }
 
-Vetor* vet_import(char* archivename){
+Vector* vet_import(char* archivename){
 
-  Vetor* v = vet_new();
+  Vector* v = vet_new();
   FILE *arq;
 
   arq = fopen(archivename, "r+");
@@ -364,7 +359,7 @@ Vetor* vet_import(char* archivename){
   return v;
 }
 
-Boolean vet_export(Vetor* v, char* archivename){
+Boolean vet_export(Vector* v, char* archivename){
   FILE *arq;
 
   arq = fopen(archivename, "w+");
@@ -373,17 +368,17 @@ Boolean vet_export(Vetor* v, char* archivename){
   }
   else{
     printf("Não foi possível abrir o arquivo!\n");
-    return false;
+    return FALSE;
   }
   for(int i = 0; i < v->size; i++)
   fprintf(arq, "%d\n", v->vetor[i]);
   fclose(arq);
 
-  return true;
+  return TRUE;
 }
 
-Vetor* vet_newrandom(int tam){
-  Vetor* v = (Vetor*) malloc(sizeof(Vetor));
+Vector* vet_newrandom(int tam){
+  Vector* v = (Vector*) malloc(sizeof(Vector));
   v->vetor = (DataType*) calloc(tam, sizeof(DataType));
 
   srand(time(NULL));
@@ -395,14 +390,14 @@ Vetor* vet_newrandom(int tam){
   return v;
 }
 
-Vetor* vet_newupward(int tam){
-  Vetor* v = vet_newrandom(tam);
+Vector* vet_newupward(int tam){
+  Vector* v = vet_newrandom(tam);
   vet_insertionsort(v);
   return v;
 }
 
-Vetor* vet_newdownward(int tam){
-  Vetor* v = vet_newrandom(tam);
+Vector* vet_newdownward(int tam){
+  Vector* v = vet_newrandom(tam);
 
   for (int i = 0; i < tam - 1; i++){
     for (int j = i; j < tam - 1; j++){
@@ -416,8 +411,8 @@ Vetor* vet_newdownward(int tam){
 return v; 
 }
 
-Vetor* vet_partialupward(int tam, int percentual){
-  Vetor* v = vet_newrandom(tam);
+Vector* vet_partialupward(int tam, int percentual){
+  Vector* v = vet_newrandom(tam);
     DataType aux;
     int i, j;
     for (i = 1; i < (float)v->size*percentual/100; i++){ 

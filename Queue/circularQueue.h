@@ -22,16 +22,16 @@ typedef struct {
 **************************************/
 
 Queue* createQueue();
-void destroyQueue(Queue* f);
-Boolean insertElement(Queue* f, DataType elemento);
-Boolean removeElement(Queue* f, DataType* saida); 
-Boolean firstElement(Queue* f, DataType* saida); 
-Boolean isEmpty(Queue* f);
-int getSize(Queue* f);
-void print(Queue* f);
-Queue* cloneQueue(Queue* f);
-void revertQueue(Queue* f);
-Boolean insertAllElements(Queue* f, DataType* vetor, int lengthVector);
+void destroyQueue(Queue* q);
+Boolean insertElement(Queue* q, DataType elemento);
+Boolean removeElement(Queue* q, DataType* saida); 
+Boolean firstElement(Queue* q, DataType* saida); 
+Boolean isEmpty(Queue* q);
+int getSize(Queue* q);
+void print(Queue* q);
+Queue* cloneQueue(Queue* q);
+void revertQueue(Queue* q);
+Boolean insertAllElements(Queue* q, DataType* vetor, int lengthVector);
 
 /**************************************
 * IMPLEMENTATIONS
@@ -50,80 +50,80 @@ Queue* createQueue(){
   }
   return queue;
 }
-void print(Queue* f){
+void print(Queue* q){
   printf("[");
-  for(int i = f->start; i < f->end; i++){
-    if(i == f->start)
-      printf("%d",f->vetor[i%f->length]);
+  for(int i = q->start; i < q->end; i++){
+    if(i == q->start)
+      printf("%d",q->vetor[i%q->length]);
     else
-      printf(", %d",f->vetor[i%f->length]);
+      printf(", %d",q->vetor[i%q->length]);
     }
     printf("]\n");
 }
-void destroyQueue(Queue* f){
-  free(f->vetor);
-  free(f);
+void destroyQueue(Queue* q){
+  free(q->vetor);
+  free(q);
 }
 
-Boolean insertElement(Queue* f, DataType elemento){
-  if(f == NULL || f->size == MAX) return FALSE;
+Boolean insertElement(Queue* q, DataType elemento){
+  if(q == NULL || q->size == MAX) return FALSE;
   
   else{
-  f->vetor[f->end] = elemento;
-  f->end = (f->end+1) % MAX;
-  f->size++;
+  q->vetor[q->end] = elemento;
+  q->end = (q->end+1) % MAX;
+  q->size++;
   return TRUE;
   }
 }
 
-Boolean removeElement(Queue* f, DataType* saida){
-  if(f == NULL || isEmpty(f)) return FALSE;
+Boolean removeElement(Queue* q, DataType* saida){
+  if(q == NULL || isEmpty(q)) return FALSE;
   
-  *saida = f->vetor[f->start%f->length]; 
-  f->start = (f->start+1) % MAX;
-  f->size--;
+  *saida = q->vetor[q->start%q->length]; 
+  q->start = (q->start+1) % MAX;
+  q->size--;
   return TRUE;
 }
 
-Boolean firstElement(Queue* f, DataType* saida){
-  if(isEmpty(f)) return FALSE;
+Boolean firstElement(Queue* q, DataType* saida){
+  if(isEmpty(q)) return FALSE;
   else{
-    *saida = f->vetor[f->start];
+    *saida = q->vetor[q->start];
     return TRUE;
   }
 }
 
-Boolean isEmpty(Queue* f){
-  if(f->size == 0) return TRUE;
+Boolean isEmpty(Queue* q){
+  if(q->size == 0) return TRUE;
   else return FALSE;
 }
 
-int getSize(Queue* f){
-  return (f->end - f->start);
+int getSize(Queue* q){
+  return (q->end - q->start);
 }
 
-Queue* cloneQueue(Queue* f){
+Queue* cloneQueue(Queue* q){
   Queue* fc = createQueue();
-  for(int i = f->start; i < f->end; i++){
-    insertElement(fc, f->vetor[i]);
+  for(int i = q->start; i < q->end; i++){
+    insertElement(fc, q->vetor[i]);
   }
-  fc->size = f->size;
-  fc->length = f->length;
+  fc->size = q->size;
+  fc->length = q->length;
   return fc;
 }
 
-void revertQueue(Queue* f){
-  DataType* revert = (DataType*) calloc(f->length, sizeof(DataType));
-  for(int i = f->size - 1, j = 0; i >= 0; i--, j++){
-    revert[j] = f->vetor[i];
+void revertQueue(Queue* q){
+  DataType* revert = (DataType*) calloc(q->length, sizeof(DataType));
+  for(int i = q->size - 1, j = 0; i >= 0; i--, j++){
+    revert[j] = q->vetor[i];
   }
-  free(f->vetor);
-  f->vetor = revert;
+  free(q->vetor);
+  q->vetor = revert;
 }
 
-Boolean insertAllElements(Queue* f, DataType* vetor, int lengthVector){
+Boolean insertAllElements(Queue* q, DataType* vetor, int lengthVector){
   for(int i = 0; i < lengthVector; i++){
-    insertElement(f, vetor[i]);
+    insertElement(q, vetor[i]);
   }
   return TRUE;
 }

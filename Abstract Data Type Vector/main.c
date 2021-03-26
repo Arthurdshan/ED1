@@ -9,8 +9,8 @@ void teste4();
 
 void teste1(){
 
-  printf("!!!!!!!!!!!PARTE 1!!!!!!!!!\n");
-  Vetor* v1 = vet_new();
+  printf("!!!!!!!!!!!PART 1!!!!!!!!!\n");
+  Vector* v1 = vet_new();
   DataType* exit;
   DataType* ptr;
   char vetString[20];
@@ -37,17 +37,17 @@ void teste1(){
 }
 
 void teste2(){
-  printf("!!!!!!!!!!!PARTE 2!!!!!!!!!\n");
-  Vetor* v2 = vet_new();
+  printf("!!!!!!!!!!!PART 2!!!!!!!!!\n");
+  Vector* v2 = vet_new();
   vet_insertEnd(v2, 40);
   vet_insertEnd(v2, 20);
   vet_insertEnd(v2, 10);
   vet_insertEnd(v2, 30);
   vet_insertEnd(v2, 1);
   vet_print(v2);
-  Vetor* clone1 = vet_clone(v2);
-  Vetor* clone2 = vet_clone(v2);
-  Vetor* clone3 = vet_clone(v2);
+  Vector* clone1 = vet_clone(v2);
+  Vector* clone2 = vet_clone(v2);
+  Vector* clone3 = vet_clone(v2);
   vet_bubblesort(clone1);
   vet_print(clone1);
   vet_selectionsort(clone2);
@@ -68,9 +68,9 @@ void teste2(){
 }
 
 void teste3(){
-  printf("!!!!!!!!!!!PARTE 3!!!!!!!!!\n");
+
   char nomeArquivo1[] = "arquivo_entrada.txt";
-  Vetor* v3 = vet_import(nomeArquivo1);
+  Vector* v3 = vet_import(nomeArquivo1);
   vet_print(v3);
   char nomeArquivo2[] = "arquivo_entrada1.txt";
   if(vet_export(v3, nomeArquivo2)){
@@ -82,11 +82,11 @@ void teste3(){
 }
 
 void teste4(){
-  printf("!!!!!!!!!!!PARTE 4!!!!!!!!!\n");
-  Vetor* v4 = vet_newrandom(10);
-  Vetor* v5 = vet_newupward(10);
-  Vetor* v6 = vet_newdownward(10);
-  Vetor* v7 = vet_partialupward(10, 50);
+
+  Vector* v4 = vet_newrandom(10);
+  Vector* v5 = vet_newupward(10);
+  Vector* v6 = vet_newdownward(10);
+  Vector* v7 = vet_partialupward(10, 50);
   vet_print(v4);
   vet_print(v5);
   vet_print(v6);
