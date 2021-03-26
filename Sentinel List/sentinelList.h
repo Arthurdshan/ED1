@@ -16,7 +16,7 @@ typedef struct node{
 
 typedef struct {
 	Node *sentinel;
-	int qtde;
+	int size;
 }List;
 
 /**************************************
@@ -42,7 +42,7 @@ void print(List* l);
 
 List* createList(){
   List* l = (List*) malloc(sizeof(List));
-  l->qtde = 0;
+  l->size = 0;
   l->sentinel = (Node*) malloc(sizeof(Node));
   return l;
 }
@@ -52,9 +52,9 @@ void print(List* l){
   Node* aux = l->sentinel->prox;
 
   printf("[");
-  while(i < l->qtde){
+  while(i < l->size){
     printf("%d", aux->value);
-    if(i < l->qtde - 1)
+    if(i < l->size - 1)
       printf(", ");
     aux = aux->prox;
     i++;
@@ -65,7 +65,7 @@ void print(List* l){
 void destroyList(List* l){
   Node* aux = l->sentinel->prox;
   Node* aux2;
-  for(int i = 0; i <= l->qtde; i++){
+  for(int i = 0; i <= l->size; i++){
     aux2 = aux;
     aux = aux->prox;
     free(aux2);
@@ -75,7 +75,7 @@ void destroyList(List* l){
 }
 
 Boolean insertOnLastPosition(List* l, DataType value){
- if(l->qtde == 0 || l == NULL) return false;
+ if(l->size == 0 || l == NULL) return false;
 
   Node* insertNode = malloc(sizeof(Node));
   insertNode->value = value;
@@ -84,19 +84,19 @@ Boolean insertOnLastPosition(List* l, DataType value){
   insertNode->ant = l->sentinel->ant;
   l->sentinel->ant->prox = insertNode;
   l->sentinel->ant = insertNode;
-  l->qtde++;
+  l->size++;
   return true;
 }
 
 Boolean insertNewElement(List* l, DataType value, int index){
- if(l == NULL || index > l->qtde + 1 || index <= 0)
+ if(l == NULL || index > l->size + 1 || index <= 0)
     return false;
   index -= 1;
 
   Node* insertNode = malloc(sizeof(Node));
   insertNode->value = value;
 
-  if(l->qtde == 0) {
+  if(l->size == 0) {
       insertNode->ant = insertNode->prox = l->sentinel;
       l->sentinel->ant = l->sentinel->prox = insertNode;
   }
@@ -105,7 +105,7 @@ Boolean insertNewElement(List* l, DataType value, int index){
       insertNode->ant = l->sentinel;
       l->sentinel->prox = insertNode;
   }
-  else if(index == l->qtde) {
+  else if(index == l->size) {
       insertNode->prox = l->sentinel;
       insertNode->ant = l->sentinel->ant;
       l->sentinel->ant->prox = insertNode;
@@ -115,7 +115,7 @@ Boolean insertNewElement(List* l, DataType value, int index){
     int i;
     Node* aux;
 
-    if(index <= l->qtde/2) {
+    if(index <= l->size/2) {
       i=0;
       aux = l->sentinel->prox;
       while(i != index) {
@@ -124,7 +124,7 @@ Boolean insertNewElement(List* l, DataType value, int index){
       }
     }
     else {
-      i = l->qtde;
+      i = l->size;
       aux = l->sentinel->ant;
       while(i != index) {
         aux = aux->ant;
@@ -138,26 +138,26 @@ Boolean insertNewElement(List* l, DataType value, int index){
     aux->ant = insertNode;
   }
 
-  l->qtde++;
+  l->size++;
   return true;
 }
 
 Boolean removeFromIndex(List* l, int index, DataType* adress){
-  if(l == NULL || index <= 0 || index > l->qtde || l->qtde == 0) 
+  if(l == NULL || index <= 0 || index > l->size || l->size == 0) 
     return false;
   index -= 1;
 
-  if(index == l->qtde - 1 && l->qtde != 1) {
+  if(index == l->size - 1 && l->size != 1) {
     *adress = l->sentinel->ant->value;
     l->sentinel->ant->ant->prox = l->sentinel;
     l->sentinel->ant = l->sentinel->ant->ant;
   }
-  else if(index == 0 && l->qtde != 1) {
+  else if(index == 0 && l->size != 1) {
     *adress = l->sentinel->prox->value;
     l->sentinel->prox->prox->ant = l->sentinel;
     l->sentinel->prox = l->sentinel->prox->prox;
   }
-  else if(l->qtde == 1) {
+  else if(l->size == 1) {
     *adress = l->sentinel->prox->value;
     l->sentinel->prox = l->sentinel;
     l->sentinel->ant = l->sentinel;
@@ -166,7 +166,7 @@ Boolean removeFromIndex(List* l, int index, DataType* adress){
     int i;
     Node* aux;
 
-    if(index <= l->qtde/2) {
+    if(index <= l->size/2) {
       i=0;
       aux = l->sentinel->prox;
       while(i != index) {
@@ -175,7 +175,7 @@ Boolean removeFromIndex(List* l, int index, DataType* adress){
       }
     }
     else {
-      i = l->qtde;
+      i = l->size;
       aux = l->sentinel->ant;
       while(i != index) {
         aux = aux->ant;
@@ -188,19 +188,19 @@ Boolean removeFromIndex(List* l, int index, DataType* adress){
     free(aux);
   }
 
-  l->qtde--;
+  l->size--;
 
   return true;
 }
 
 int getPosition(List* l, DataType value) {
-  if(l == NULL || l->qtde == 0)
+  if(l == NULL || l->size == 0)
     return -1;
 
   int index = 0;
   Node* aux = l->sentinel->prox;
   
-  while(index < l->qtde) {
+  while(index < l->size) {
     if(aux->value != value) {
       aux = aux->prox;
       index += 1;
@@ -216,7 +216,7 @@ int getPosition(List* l, DataType value) {
 
 int removeElement(List *l, DataType value){
   if(l == NULL) return -1;
-  if(l->qtde == 0) return -1;
+  if(l->size == 0) return -1;
 
   int index;
   index = getPosition(l, value);
@@ -226,7 +226,7 @@ int removeElement(List *l, DataType value){
   }
   Node* aux;
   aux = l->sentinel;
-  for(int i = 0; i <= l->qtde; i++){
+  for(int i = 0; i <= l->size; i++){
     if(value == aux->value)
       break;
   aux = aux->prox;
@@ -234,7 +234,7 @@ int removeElement(List *l, DataType value){
   if(aux != l->sentinel){
     aux->ant->prox = aux->prox;
     aux->prox->ant = aux->ant;
-    l->qtde--;
+    l->size--;
     free(aux);
     return index;
   }
@@ -242,9 +242,9 @@ int removeElement(List *l, DataType value){
 }
 
 Boolean searchList(List* l, int index, DataType* adress){
-  if(index < 0 || index > l->qtde)    return false;
+  if(index < 0 || index > l->size)    return false;
   if(l == NULL)   return false;
-  if(l->qtde == 0)    return false;
+  if(l->size == 0)    return false;
   Node* aux = l->sentinel->ant;
 
   for(int i=0; i<=index; i++){
@@ -271,7 +271,7 @@ Boolean hasElement(List* l, DataType value){
 }
 
 int getSize(List* l){
-  return l->qtde;
+  return l->size;
 }
 
 Boolean listToString(List* l, char* stringAdress){
@@ -280,14 +280,14 @@ Boolean listToString(List* l, char* stringAdress){
   Node* aux = l->sentinel->prox;
   stringAdress[pos++] = '[';
 
-   for(int i = 0; i < l->qtde; i++){
+   for(int i = 0; i < l->size; i++){
     sprintf(temp, "%d", aux->value);
     int j = 0;
     while(temp[j] != '\0'){
       stringAdress[pos++] = temp[j];
       j++;
     }
-    if(i < l->qtde-1){
+    if(i < l->size-1){
       stringAdress[pos++] = ',';
       stringAdress[pos++] = ' ';
     }
