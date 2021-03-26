@@ -3,16 +3,16 @@
 #include "ADT.h"
 
 void teste1(){
-  printf("!!!!!!!!!!Parte 1!!!!!!!!!\n\n");
+  printf("!!!!!!!!!!Part 1!!!!!!!!!\n\n");
   Vetor* v1 = vet_new();
 
-  Produto* p1 = create_product(10, "Sabonete", 1.99);
-  Produto* p2 = create_product(20, "teclado", 38.60);
-  Produto* p3 = create_product(30, "mouse", 34.64);
-  Produto* p4 = create_product(40, "oculos", 35.64);
-  Produto* p5 = create_product(50, "cadeira", 121.64);
-  Produto* p6 = create_product(60, "pirulito", 13.64);
-  Produto* p7 = create_product(70, "caderno", 8.64);
+  Product* p1 = create_product(10, "Sabonete", 1.99);
+  Product* p2 = create_product(20, "teclado", 38.60);
+  Product* p3 = create_product(30, "mouse", 34.64);
+  Product* p4 = create_product(40, "oculos", 35.64);
+  Product* p5 = create_product(50, "cadeira", 121.64);
+  Product* p6 = create_product(60, "pirulito", 13.64);
+  Product* p7 = create_product(70, "caderno", 8.64);
 
   vet_insertEnd(v1, *p1);
   vet_insertEnd(v1, *p2);
@@ -72,16 +72,16 @@ void teste1(){
 }
 
 void teste2(){
-  printf("!!!!!!!!!!Parte 2!!!!!!!!!\n\n");
+  printf("!!!!!!!!!!Part 2!!!!!!!!!\n\n");
   Vetor* v2 = vet_new();
 
-  Produto* p1 = create_product(10, "Sabonete", 1.99);
-  Produto* p2 = create_product(20, "teclado", 38.60);
-  Produto* p3 = create_product(30, "mouse", 34.64);
-  Produto* p4 = create_product(40, "oculos", 35.64);
-  Produto* p5 = create_product(50, "cadeira", 121.64);
-  Produto* p6 = create_product(60, "pirulito", 13.64);
-  Produto* p7 = create_product(70, "caderno", 8.64);
+  Product* p1 = create_product(10, "Sabonete", 1.99);
+  Product* p2 = create_product(20, "teclado", 38.60);
+  Product* p3 = create_product(30, "mouse", 34.64);
+  Product* p4 = create_product(40, "oculos", 35.64);
+  Product* p5 = create_product(50, "cadeira", 121.64);
+  Product* p6 = create_product(60, "pirulito", 13.64);
+  Product* p7 = create_product(70, "caderno", 8.64);
 
   vet_insertEnd(v2, *p5);
   vet_insertEnd(v2, *p1);
@@ -105,12 +105,12 @@ void teste2(){
   vet_selectionsort(v5);
   vet_print(v5);
   
-  if(vet_binarysearch(v3, *p3) == -1) printf("posição não encontrada!\n");
-  else printf("elemento p3 encontrado na posição %d\n\n", vet_binarysearch(v3, *p3));
+  if(vet_binarysearch(v3, *p3) == -1) printf("position not found!\n");
+  else printf("found on position %d\n\n", vet_binarysearch(v3, *p3));
 }
 
 void teste3(){
-  printf("!!!!!!!!!!Parte 3!!!!!!!!!\n\n");
+  printf("!!!!!!!!!!Part 3!!!!!!!!!\n\n");
   char nomeArquivo1[] = "lista_produtos.txt";
   Vetor* v2 = vet_import(nomeArquivo1);
   vet_print(v2);
@@ -123,9 +123,6 @@ void teste3(){
 }
 
 int main(){
-	// Desenvolva os testes para verificar se a função implementada 
-  //está funcionando como esperado
-	// teste1();
-	// teste2();
+
   teste3();
 }

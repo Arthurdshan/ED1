@@ -8,7 +8,7 @@ typedef int DataType;
 * DATA
 **************************************/
 typedef struct node{
-	DataType value;
+	DataType data;
 	struct node* prox;
 }Node;
 
@@ -24,7 +24,7 @@ typedef struct {
 
 Queue* createQueue();
 void destroyQueue(Queue* q);
-Boolean insertElement(Queue* q, DataType value);
+Boolean insertElement(Queue* q, DataType data);
 Boolean removeElement(Queue* q, DataType* saida);
 Boolean firstElement(Queue* q, DataType* saida); 
 int getSize(Queue* q);
@@ -59,11 +59,11 @@ void destroyQueue(Queue* q){
   }
 }
 
-Boolean insertElement(Queue* q, DataType value){
+Boolean insertElement(Queue* q, DataType data){
   if(q == NULL) return FALSE;
   Node* node = (Node*) malloc (sizeof(Node));
   if(node == NULL) return FALSE;
-  node->value = value;
+  node->data = data;
   node->prox = NULL;
 
   if(isEmpty(q)) q->start = node;
@@ -76,7 +76,7 @@ Boolean insertElement(Queue* q, DataType value){
 Boolean removeElement(Queue* q, DataType* saida){
   if(isEmpty(q)) return FALSE;
   Node* node = q->start;
-  *saida = node->value;
+  *saida = node->data;
   q->start = q->start->prox;
   if(q->start == NULL) q->end = NULL;
   free(node);
@@ -86,7 +86,7 @@ Boolean removeElement(Queue* q, DataType* saida){
 
 Boolean firstElement(Queue* q, DataType* saida){
   if(isEmpty(q)) return FALSE;
-  *saida = q->start->value;
+  *saida = q->start->data;
   return TRUE;
 }
 
@@ -104,7 +104,7 @@ Boolean isEmpty(Queue* q){
 void print(Queue *q){
   Node* aux = q->start;
   for(int i = 0; i < q->size; i++){
-    printf("%d -> ",aux->value);
+    printf("%d -> ",aux->data);
     aux = aux->prox;
   }
   printf("NULL\n");

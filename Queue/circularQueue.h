@@ -23,7 +23,7 @@ typedef struct {
 
 Queue* createQueue();
 void destroyQueue(Queue* q);
-Boolean insertElement(Queue* q, DataType elemento);
+Boolean insertElement(Queue* q, DataType data);
 Boolean removeElement(Queue* q, DataType* saida); 
 Boolean firstElement(Queue* q, DataType* saida); 
 Boolean isEmpty(Queue* q);
@@ -65,11 +65,11 @@ void destroyQueue(Queue* q){
   free(q);
 }
 
-Boolean insertElement(Queue* q, DataType elemento){
+Boolean insertElement(Queue* q, DataType data){
   if(q == NULL || q->size == MAX) return FALSE;
   
   else{
-  q->vetor[q->end] = elemento;
+  q->vetor[q->end] = data;
   q->end = (q->end+1) % MAX;
   q->size++;
   return TRUE;

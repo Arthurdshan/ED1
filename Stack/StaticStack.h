@@ -15,7 +15,7 @@ typedef struct {
 
 Stack* createStack();
 void destroyStack(Stack* s);
-Boolean pushElement(Stack* s, DataType value);
+Boolean pushElement(Stack* s, DataType data);
 Boolean popElement(Stack* s, DataType* saida);
 Boolean topElement(Stack* s, DataType* saida);
 void print(Stack* s);
@@ -37,10 +37,10 @@ void destroyStack(Stack* s){
   free(s);
 }
 
-Boolean pushElement(Stack* s, DataType value){
+Boolean pushElement(Stack* s, DataType data){
   if(s == NULL) return FALSE;
   if(s->size == s->length) return FALSE;
-  s->vector[s->size] = value;
+  s->vector[s->size] = data;
   s->size++;
   return TRUE;
 }

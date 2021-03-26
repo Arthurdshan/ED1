@@ -7,7 +7,7 @@ typedef int DataType;
 typedef struct node{
     int row;
     int column;
-    int value;
+    int data;
     struct node* right;
     struct node* up;        
     struct node* left;
@@ -22,9 +22,8 @@ typedef struct{
     int sizeOfColumns;    //number of matrix columns
 }Matrix;
 
-
 Matrix* createMatrix(int numberOfRows, int numberOfColumns);
-Boolean addValueToMatrix(Matrix* m, int row, int column, int value);
+Boolean addValueToMatrix(Matrix* m, int row, int column, int data);
 int acessMatrixPosition(Matrix* m, int row, int column);
 void print(Matrix* m);
 Matrix* destroyMatrix(Matrix** m);
@@ -106,7 +105,7 @@ int acessMatrixPosition(Matrix* m, int row, int column){
     if(column >= m->sizeOfColumns || column < 0) return 0;
 
     Node* aux1 = findNodeRow(m->rows[row]->right, column,m->rows[row]);
-    return aux1->value;
+    return aux1->data;
 }
 
 Node* findNodeColumn(Node* aux,int row, Node* sentinel){
@@ -130,7 +129,7 @@ void insertColumn(int row, int column, Node* node, Matrix* m){
     Node* aux = findNodeColumn(sentinel->down, row, sentinel);
     
     if(aux != sentinel && row == aux->row){
-        aux->value = node->value;
+        aux->data = node->data;
         free(node);
     }else{
         node->down = aux;
@@ -146,7 +145,7 @@ void insertRow(int row,int column, Node* node, Matrix* m){
     Node* aux = findNodeRow(sentinel->right,column, sentinel);
 
     if(aux != sentinel && aux->column == column){
-        aux->value = node->value;
+        aux->data = node->data;
         free(node);
     }else{
         node->right = aux;
@@ -156,11 +155,11 @@ void insertRow(int row,int column, Node* node, Matrix* m){
     }
 }
 
-Boolean addValueToMatrix(Matrix* m, int row, int column, int value){
+Boolean addValueToMatrix(Matrix* m, int row, int column, int data){
     if(m == NULL) return FALSE;
     
     Node* node = (Node*) malloc(sizeof(Node));
-    node->value = value;
+    node->data = data;
     node->column = column;
     node->row = row;
     insertColumn(row,column, node, m);
@@ -180,7 +179,7 @@ void print(Matrix* m){
         for(int j = 0; j < m->sizeOfColumns; j++){
             if(j != aux->column || aux == m->rows[i]) printf("0\t\t");  
             else{
-                printf("%d\t\t",aux->value);
+                printf("%d\t\t",aux->data);
                 aux = aux->right;
             }  
         }

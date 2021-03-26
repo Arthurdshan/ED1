@@ -23,7 +23,7 @@ int getSize(priorityQueue* q);
 void print(priorityQueue* q);
 priorityQueue* cloneQueue(priorityQueue* q);
 Boolean insertAllElements(priorityQueue* q, DataType* array, int size);
-void promoveElement(priorityQueue* q, int filho);
+void promoveElement(priorityQueue* q, int leaf);
 void downElement(priorityQueue* q, int root);
 void switchElements(DataType* a, DataType* b);
 int root(int j);
@@ -51,10 +51,10 @@ Boolean insertInQueue(priorityQueue* q, DataType value){
   return TRUE;
 }
 
-void promoveElement(priorityQueue* q, int pos){
-  if(q->array[pos] <= q->array[root(pos)]) return;
-  switchElements(&q->array[pos],&q->array[root(pos)]);
-  promoveElement(q, root(pos));
+void promoveElement(priorityQueue* q, int leaf){
+  if(q->array[leaf] <= q->array[root(leaf)]) return;
+  switchElements(&q->array[leaf],&q->array[root(leaf)]);
+  promoveElement(q, root(leaf));
 }
 
 void switchElements(DataType* a, DataType* b){

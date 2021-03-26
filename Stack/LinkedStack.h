@@ -7,7 +7,7 @@ typedef enum boolean{FALSE, TRUE} Boolean;
 typedef int DataType;
 
 typedef struct node{
-	DataType value;
+	DataType data;
 	struct node *next;
 }Node;
 
@@ -18,7 +18,7 @@ typedef struct {
 
 Stack* createStack();
 void destroyStack(Stack* s);
-Boolean pushElement(Stack* s, DataType value);
+Boolean pushElement(Stack* s, DataType data);
 Boolean popElement(Stack* s, DataType* exit);
 Boolean topElement(Stack* s, DataType* exit);
 void print(Stack* s);
@@ -45,12 +45,12 @@ void destroyStack(Stack* s){
   free(s);
 }
 
-Boolean pushElement(Stack* s, DataType value){
+Boolean pushElement(Stack* s, DataType data){
   
   if(s == NULL) return FALSE;
   
   Node* node = (Node*) malloc(sizeof(Node));
-  node->value = value;
+  node->data = data;
   node->next = s->top;
   s->size++;
   s->top = node;
@@ -61,7 +61,7 @@ Boolean popElement(Stack* s, DataType* exit){
   
   if(s == NULL || s->top == NULL) return FALSE;
 
-  *exit = s->top->value;
+  *exit = s->top->data;
   Node* aux = s->top;
   s->top = aux->next;
   s->size--; 
@@ -73,7 +73,7 @@ void print(Stack* s){
   
   Node* aux = s->top;
   for(int i = 0; i < s->size; i++){
-    printf("%d -> ", aux->value);
+    printf("%d -> ", aux->data);
     aux = aux->next;
   }
   free(aux);
@@ -84,7 +84,7 @@ Boolean topElement(Stack* s, DataType* exit){
   
   if (s == NULL || s->top == NULL) return FALSE;
 
-  *exit = s->top->value;
+  *exit = s->top->data;
   return TRUE; 
 }
 
@@ -98,13 +98,13 @@ Stack* cloneStack(Stack* s){
   Node* caminho = s->top;
   Node* temp;
   for(int i = 0; i < s->size; i++){
-    Node* value = (Node*) malloc(sizeof(Node));
-    value->value = caminho->value;
+    Node* data = (Node*) malloc(sizeof(Node));
+    data->data = caminho->data;
       
-    if(i == 0) clone->top = value;
-    else temp->next = value;
+    if(i == 0) clone->top = data;
+    else temp->next = data;
       
-    temp = value;
+    temp = data;
     caminho = caminho->next;
   }
   return clone;
@@ -115,7 +115,7 @@ void revertStack(Stack* s){
   Stack* p1 = createStack();
   Node* aux = s->top;
   while(aux != NULL){
-    pushElement(p1,aux->value);
+    pushElement(p1,aux->data);
     aux = aux->next;
   }
   p1->size = s->size;

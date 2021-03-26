@@ -8,15 +8,15 @@ typedef struct{
 	int code;
 	char description[120];
 	float price;
-}Produto;
+}Product;
 
 typedef struct{
-	Produto* vetor;
+	Product* vetor;
 	int length;
 	int size;
 }Vetor;
 
-typedef Produto DataType;
+typedef Product DataType;
 typedef enum boolean{false=0, true=1} Boolean;
 #define LENGTH 5
 //#define POSICAO_INVALIDA
@@ -24,7 +24,7 @@ typedef enum boolean{false=0, true=1} Boolean;
 /*prototypes*/
 //part 1
 Vetor* vet_new();
-Produto* create_product(int code, char* description, float price);
+Product* create_product(int code, char* description, float price);
 Boolean vet_insertEnd(Vetor* v, DataType element);
 Boolean vet_insert(Vetor* v, DataType element, int index);
 Boolean vet_substitute(Vetor* v, int index, DataType newElement);
@@ -60,8 +60,8 @@ Vetor* vet_new(){
   return v1;
 }
 
-Produto* create_product(int code, char* description, float price){
-  Produto* p1= (Produto*) malloc(sizeof(Produto));
+Product* create_product(int code, char* description, float price){
+  Product* p1= (Product*) malloc(sizeof(Product));
   p1->code = code;
   strcpy(p1->description, description);
   p1->price = price;
@@ -92,9 +92,6 @@ void vetor_double(Vetor *v){
   for(int i = 0; i < v->size; i++){
     aux[i] = v->vetor[i];
   }
-  printf("*********************\n");
-  printf("*vetor foi aumentado*\n");
-  printf("*********************\n");
   v->length *= 2;
   
   free(v->vetor);
@@ -115,9 +112,6 @@ void vetor_reduce(Vetor *v){
   for(int i = 0; i < v->size; i++){
     v1[i] = v->vetor[i];
   }
-  printf("********************\n");
-  printf("vetor foi reduzido.\n");
-  printf("********************\n");
   free(v->vetor);
   v->vetor = v1;
   v->length /= 2;
