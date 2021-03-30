@@ -4,7 +4,7 @@
 
 void teste1(){
   printf("!!!!!!!!!!Part 1!!!!!!!!!\n\n");
-  Vetor* v1 = vet_new();
+  Vector* v1 = vet_new();
 
   Product* p1 = create_product(10, "Sabonete", 1.99);
   Product* p2 = create_product(20, "teclado", 38.60);
@@ -73,7 +73,7 @@ void teste1(){
 
 void teste2(){
   printf("!!!!!!!!!!Part 2!!!!!!!!!\n\n");
-  Vetor* v2 = vet_new();
+  Vector* v2 = vet_new();
 
   Product* p1 = create_product(10, "Sabonete", 1.99);
   Product* p2 = create_product(20, "teclado", 38.60);
@@ -91,9 +91,9 @@ void teste2(){
   vet_insertEnd(v2, *p7);
   vet_insertEnd(v2, *p4);
 
-  Vetor* v3 = vet_clone(v2);
-  Vetor* v4 = vet_clone(v2);
-  Vetor* v5 = vet_clone(v2);
+  Vector* v3 = vet_clone(v2);
+  Vector* v4 = vet_clone(v2);
+  Vector* v5 = vet_clone(v2);
 
   printf("Bubble sort\n");
   vet_bubblesort(v3);
@@ -112,7 +112,7 @@ void teste2(){
 void teste3(){
   printf("!!!!!!!!!!Part 3!!!!!!!!!\n\n");
   char nomeArquivo1[] = "lista_produtos.txt";
-  Vetor* v2 = vet_import(nomeArquivo1);
+  Vector* v2 = vet_import(nomeArquivo1);
   vet_print(v2);
   char nomeArquivo2[] = "lista_produtos1.txt";
   if(vet_export(v2, nomeArquivo2)) printf("Valores passados com sucesso para o arquivo\n\n");

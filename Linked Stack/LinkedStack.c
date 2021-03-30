@@ -1,7 +1,6 @@
 #include "LinkedStack.h"
 
 Stack* createStack(){
-  
   Stack* s = (Stack*) malloc(sizeof(Stack));
   s->size = 0;
   return s;
@@ -19,7 +18,6 @@ void destroyStack(Stack* s){
 }
 
 Boolean pushElement(Stack* s, DataType data){
-  
   if(s == NULL) return false;
   
   Node* node = (Node*) malloc(sizeof(Node));
@@ -31,7 +29,6 @@ Boolean pushElement(Stack* s, DataType data){
 }
 
 Boolean popElement(Stack* s, DataType* exit){
-  
   if(s == NULL || s->top == NULL) return false;
 
   *exit = s->top->data;
@@ -43,7 +40,6 @@ Boolean popElement(Stack* s, DataType* exit){
 }
 
 void print(Stack* s){
-  
   Node* aux = s->top;
   for(int i = 0; i < s->size; i++){
     printf("%d -> ", aux->data);
@@ -54,7 +50,6 @@ void print(Stack* s){
 }
 
 Boolean topElement(Stack* s, DataType* exit){
-  
   if (s == NULL || s->top == NULL) return false;
 
   *exit = s->top->data;
@@ -66,7 +61,6 @@ int getSize(Stack* s){
 }
 
 Stack* cloneStack(Stack* s){
-  
   Stack* clone = (Stack*) malloc(sizeof(Stack));
   Node* caminho = s->top;
   Node* temp;
@@ -84,7 +78,6 @@ Stack* cloneStack(Stack* s){
 }
 
 void revertStack(Stack* s){
-  
   Stack* p1 = createStack();
   Node* aux = s->top;
   while(aux != NULL){
@@ -102,7 +95,6 @@ void revertStack(Stack* s){
  * size = vector size
 */
 Boolean pushAllElements(Stack* s, DataType* vetor, int size){
-
   if (s == NULL) return false;
 
   for(int i = 0; i < size; i++){
