@@ -1,5 +1,3 @@
-// Just uncomment what type of queue you want to test ;-)
-// #include "circularQueue.h"
 #include "LinkedQueue.h"
 
 int main(){
