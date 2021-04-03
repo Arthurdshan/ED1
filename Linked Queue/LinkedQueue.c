@@ -1,6 +1,8 @@
+#include<stdio.h>
+#include<stdlib.h>
 #include "LinkedQueue.h"
 
-Queue* createQueue(){
+Queue* create_queue(){
   Queue *q = (Queue*) malloc(sizeof(Queue));
   if(q != NULL) {
     q->start = NULL;
@@ -10,9 +12,9 @@ Queue* createQueue(){
   return q;
 }
 
-void destroyQueue(Queue* q){
+void destroy_queue(Queue *q){
   if(q != NULL){
-    Node* aux;
+    Node *aux;
     while(q->start != NULL){
       aux = q->start;
       q->start = q->start->prox;
@@ -22,24 +24,24 @@ void destroyQueue(Queue* q){
   }
 }
 
-Boolean insertElement(Queue* q, DataType data){
+Boolean insert_element(Queue *q, DataType data){
   if(q == NULL) return false;
-  Node* node = (Node*) malloc (sizeof(Node));
+  Node *node = (Node*) malloc (sizeof(Node));
   if(node == NULL) return false;
   node->data = data;
   node->prox = NULL;
 
-  if(isEmpty(q)) q->start = node;
+  if(is_empty(q)) q->start = node;
   else q->end->prox = node;
   q->end = node;
   q->size++;
   return true;
 }
 
-Boolean removeElement(Queue* q, DataType* saida){
-  if(isEmpty(q)) return false;
-  Node* node = q->start;
-  *saida = node->data;
+Boolean remove_element(Queue *q, DataType *mem_adress){
+  if(is_empty(q)) return false;
+  Node *node = q->start;
+  *mem_adress = node->data;
   q->start = q->start->prox;
   if(q->start == NULL) q->end = NULL;
   free(node);
@@ -47,25 +49,25 @@ Boolean removeElement(Queue* q, DataType* saida){
   return true;
 }
 
-Boolean firstElement(Queue* q, DataType* saida){
-  if(isEmpty(q)) return false;
-  *saida = q->start->data;
+Boolean first_element(Queue *q, DataType *mem_adress){
+  if(is_empty(q)) return false;
+  *mem_adress = q->start->data;
   return true;
 }
 
-int getSize(Queue* q){
+int get_size(Queue *q){
   if(q == NULL) return 0;
 return q->size;
 }
 
-Boolean isEmpty(Queue* q){
+Boolean is_empty(Queue *q){
   if(q == NULL) return true;
   if(q->start == NULL) return true;
   return false;
 }
 
 void print(Queue *q){
-  Node* aux = q->start;
+  Node *aux = q->start;
   for(int i = 0; i < q->size; i++){
     printf("%d -> ",aux->data);
     aux = aux->prox;
@@ -74,10 +76,10 @@ void print(Queue *q){
 }
 
 
-void revertQueue(Queue* q){
-  Node* aux = NULL; 
-  Node* aux1 = q->start; 
-  Node* aux2 = NULL; 
+void revert_queue(Queue *q){
+  Node *aux = NULL; 
+  Node *aux1 = q->start; 
+  Node *aux2 = NULL; 
   while (aux1 != NULL) { 
     aux2 = aux1->prox; 
     aux1->prox = aux; 
@@ -87,12 +89,12 @@ void revertQueue(Queue* q){
   q->start = aux; 
 }
 
-Boolean insertAllElements(Queue* q, DataType* vetor, int size){
+Boolean insert_all_elements(Queue *q, DataType *vector, int size){
   if (q == NULL) return false;
 
   for(int i = 0; i < size; i++){
-    int aux = vetor[i];
-    insertElement(q, aux);
+    int aux = vector[i];
+    insert_element(q, aux);
   }
   return true;
 }

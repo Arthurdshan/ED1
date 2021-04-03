@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 typedef enum boolean{false, true} Boolean;
 typedef int DataType;
 
@@ -14,13 +11,13 @@ typedef struct {
 	int size;
 }Stack;
 
-Stack* createStack();
-void destroyStack(Stack* s);
-Boolean pushElement(Stack* s, DataType data);
-Boolean popElement(Stack* s, DataType* exit);
-Boolean topElement(Stack* s, DataType* exit);
-void print(Stack* s);
-int getSize(Stack* s);
-Stack* cloneStack(Stack* s);
-void revertStack(Stack* s);
-Boolean pushAllElements(Stack* s, DataType* vector, int size);
+Stack* create_stack();
+void destroy_stack(Stack *s);
+Boolean push_element(Stack *s, DataType data);
+Boolean pop_element(Stack *s, DataType *mem_adress);
+Boolean top_element(Stack *s, DataType *mem_adress);
+void print(Stack *s);
+int get_size(Stack *s);
+Stack *clone_stack(Stack *s);
+void revert_stack(Stack *s);
+Boolean push_all_elements(Stack *s, DataType *vector, int size);

@@ -32,7 +32,7 @@ After this, you can make a pull request. Then just wait for it to be merged!
 1. **Fork this repository**
 2. **Clone your fork to your machine**
 ```
-git clone https://github.com/your-username/Data-Structure-1.git
+git clone https://github.com/your-username/Data-Structure.git
 ```
 3. **Create a branch**
 ```
@@ -46,4 +46,4 @@ git commit -m "Commit message"
 git push origin branch-name
 ```
 6. Create a new pull request from your forked repository
-7. Star this repository to make it reach more people!
+7. Star this repository to make it reach more people! Happy coding!

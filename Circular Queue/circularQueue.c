@@ -1,9 +1,13 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 8
+
 #include "circularQueue.h"
 
-Queue* createQueue(){
+Queue* create_queue(){
 
   Queue* queue = (Queue*) malloc(sizeof(Queue));
-  queue->vetor = (DataType*) calloc(MAX, sizeof(DataType));
+  queue->vector = (DataType*) calloc(MAX, sizeof(DataType));
   
   if(queue != NULL){
   queue->length = MAX;
@@ -13,80 +17,80 @@ Queue* createQueue(){
   }
   return queue;
 }
-void print(Queue* q){
+void print_queue(Queue* q){
   printf("[");
   for(int i = q->start; i < q->end; i++){
     if(i == q->start)
-      printf("%d",q->vetor[i%q->length]);
+      printf("%d",q->vector[i%q->length]);
     else
-      printf(", %d",q->vetor[i%q->length]);
+      printf(", %d",q->vector[i%q->length]);
     }
     printf("]\n");
 }
-void destroyQueue(Queue* q){
-  free(q->vetor);
+void destroy_queue(Queue* q){
+  free(q->vector);
   free(q);
 }
 
-Boolean insertElement(Queue* q, DataType data){
+Boolean insert_element(Queue* q, DataType data){
   if(q == NULL || q->size == MAX) return false;
   
   else{
-  q->vetor[q->end] = data;
+  q->vector[q->end] = data;
   q->end = (q->end+1) % MAX;
   q->size++;
   return true;
   }
 }
 
-Boolean removeElement(Queue* q, DataType* saida){
-  if(q == NULL || isEmpty(q)) return false;
+Boolean remove_element(Queue* q, DataType* mem_adress){
+  if(q == NULL || is_empty(q)) return false;
   
-  *saida = q->vetor[q->start%q->length]; 
+  *mem_adress = q->vector[q->start%q->length]; 
   q->start = (q->start+1) % MAX;
   q->size--;
   return true;
 }
 
-Boolean firstElement(Queue* q, DataType* saida){
-  if(isEmpty(q)) return false;
+Boolean first_element(Queue* q, DataType* mem_adress){
+  if(is_empty(q)) return false;
   else{
-    *saida = q->vetor[q->start];
+    *mem_adress = q->vector[q->start];
     return true;
   }
 }
 
-Boolean isEmpty(Queue* q){
+Boolean is_empty(Queue* q){
   if(q->size == 0) return true;
   else return false;
 }
 
-int getSize(Queue* q){
+int get_size(Queue* q){
   return (q->end - q->start);
 }
 
-Queue* cloneQueue(Queue* q){
-  Queue* fc = createQueue();
+Queue* clone_queue(Queue* q){
+  Queue* cq = create_queue();
   for(int i = q->start; i < q->end; i++){
-    insertElement(fc, q->vetor[i]);
+    insert_element(cq, q->vector[i]);
   }
-  fc->size = q->size;
-  fc->length = q->length;
-  return fc;
+  cq->size = q->size;
+  cq->length = q->length;
+  return cq;
 }
 
-void revertQueue(Queue* q){
+void revert_queue(Queue* q){
   DataType* revert = (DataType*) calloc(q->length, sizeof(DataType));
   for(int i = q->size - 1, j = 0; i >= 0; i--, j++){
-    revert[j] = q->vetor[i];
+    revert[j] = q->vector[i];
   }
-  free(q->vetor);
-  q->vetor = revert;
+  free(q->vector);
+  q->vector = revert;
 }
 
-Boolean insertAllElements(Queue* q, DataType* vetor, int lengthVector){
-  for(int i = 0; i < lengthVector; i++){
-    insertElement(q, vetor[i]);
+Boolean insert_all_elements(Queue* q, DataType* vector, int length){
+  for(int i = 0; i < length; i++){
+    insert_element(q, vector[i]);
   }
   return true;
 }

@@ -4,14 +4,14 @@ int main(){
 
   int removed;
 
-  Queue* q = createQueue();     
-  print(q);          
-  insertElement(q, 1);                       
-  insertElement(q, 2);                       
-  insertElement(q, 3);                        
-  insertElement(q, 4); 
-  print(q);
-  removeElement(q, &removed);              
-  print(q);
+  Queue* q = create_queue();     
+  print_queue(q);          
+  insert_element(q, 1);                       
+  insert_element(q, 2);                       
+  insert_element(q, 3);                        
+  insert_element(q, 4); 
+  print_queue(q);
+  remove_element(q, &removed);              
+  print_queue(q);
 
 }
