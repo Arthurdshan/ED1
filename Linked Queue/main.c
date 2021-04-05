@@ -1,4 +1,4 @@
-#include "LinkedQueue.h"
+#include "linked_queue.h"
 
 int main(){
 

@@ -5,6 +5,7 @@ Use this project to make your first contribution to an open source project on Gi
 
 Hope this helps. :)
 
+![alt text](https://imgur.com/a/UiDP1d3)
 ## Why this repository? 
 
 Learning Data Structure and getting started with open source contribution are the two main goals

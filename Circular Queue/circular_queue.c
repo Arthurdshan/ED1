@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #define MAX 8
 
-#include "circularQueue.h"
+#include "circular_queue.h"
 
 Queue* create_queue(){
 
