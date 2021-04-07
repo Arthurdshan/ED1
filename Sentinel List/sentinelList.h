@@ -1,15 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef enum boolean{false=0, true=1} Boolean;
-typedef int DataType;
+typedef enum boolean{false, true} Boolean;
 
 /**************************************
 * DATA
 **************************************/
 
 typedef struct node{
-  DataType value;
+  int value;
   struct node* prox;
   struct node* ant;
 }Node;
@@ -22,25 +21,25 @@ typedef struct {
 /**************************************
 * PROTOTYPES
 **************************************/
-List* createList();
-void destroyList(List* l);
-Boolean insertOnLastPosition(List* l, DataType value);
-Boolean insertNewElement(List* l, DataType value, int index);
-Boolean removeFromIndex(List* l, int index, DataType* adress);
-int removeElement(List* l, DataType value);
-Boolean substituteElement(List* l, int index, DataType newElement);
-int getPosition(List* l, DataType value);
-Boolean searchList(List* l, int index, DataType* adress);
-Boolean hasElement(List* l, DataType value);
-int getSize(List* l);
-Boolean listToString(List* l, char* stringAdress);
+List* create_List();
+void destroy_list(List* l);
+Boolean insert_on_last_position(List* l, int value);
+Boolean insert_new_element(List* l, int value, int index);
+Boolean remove_from_index(List* l, int index, int* mem_adress);
+int remove_element(List* l, int value);
+Boolean substitute_element(List* l, int index, int new_element);
+int get_position(List* l, int value);
+Boolean search_list(List* l, int index, int* mem_adress);
+Boolean has_element(List* l, int value);
+int get_size(List* l);
+Boolean list_to_string(List* l, char* stringAdress);
 void print(List* l);
 
 /**************************************
 * IMPLEMENTATION
 **************************************/
 
-List* createList(){
+List* create_List(){
   List* l = (List*) malloc(sizeof(List));
   l->size = 0;
   l->sentinel = (Node*) malloc(sizeof(Node));
@@ -62,7 +61,7 @@ void print(List* l){
   printf("]\n\n");
 }
 
-void destroyList(List* l){
+void destroy_list(List* l){
   Node* aux = l->sentinel->prox;
   Node* aux2;
   for(int i = 0; i <= l->size; i++){
@@ -74,7 +73,7 @@ void destroyList(List* l){
   free(l);
 }
 
-Boolean insertOnLastPosition(List* l, DataType value){
+Boolean insert_on_last_position(List* l, int value){
  if(l->size == 0 || l == NULL) return false;
 
   Node* insertNode = malloc(sizeof(Node));
@@ -88,7 +87,7 @@ Boolean insertOnLastPosition(List* l, DataType value){
   return true;
 }
 
-Boolean insertNewElement(List* l, DataType value, int index){
+Boolean insert_new_element(List* l, int value, int index){
  if(l == NULL || index > l->size + 1 || index <= 0)
     return false;
   index -= 1;
@@ -142,23 +141,23 @@ Boolean insertNewElement(List* l, DataType value, int index){
   return true;
 }
 
-Boolean removeFromIndex(List* l, int index, DataType* adress){
+Boolean remove_from_index(List* l, int index, int* mem_adress){
   if(l == NULL || index <= 0 || index > l->size || l->size == 0) 
     return false;
   index -= 1;
 
   if(index == l->size - 1 && l->size != 1) {
-    *adress = l->sentinel->ant->value;
+    *mem_adress = l->sentinel->ant->value;
     l->sentinel->ant->ant->prox = l->sentinel;
     l->sentinel->ant = l->sentinel->ant->ant;
   }
   else if(index == 0 && l->size != 1) {
-    *adress = l->sentinel->prox->value;
+    *mem_adress = l->sentinel->prox->value;
     l->sentinel->prox->prox->ant = l->sentinel;
     l->sentinel->prox = l->sentinel->prox->prox;
   }
   else if(l->size == 1) {
-    *adress = l->sentinel->prox->value;
+    *mem_adress = l->sentinel->prox->value;
     l->sentinel->prox = l->sentinel;
     l->sentinel->ant = l->sentinel;
   }
@@ -184,7 +183,7 @@ Boolean removeFromIndex(List* l, int index, DataType* adress){
     }
     aux->prox->ant = aux->ant;
     aux->ant->prox = aux->prox;
-    *adress = aux->value;
+    *mem_adress = aux->value;
     free(aux);
   }
 
@@ -193,7 +192,7 @@ Boolean removeFromIndex(List* l, int index, DataType* adress){
   return true;
 }
 
-int getPosition(List* l, DataType value) {
+int get_position(List* l, int value) {
   if(l == NULL || l->size == 0)
     return -1;
 
@@ -214,12 +213,12 @@ int getPosition(List* l, DataType value) {
   else return -1;
 }
 
-int removeElement(List *l, DataType value){
+int remove_element(List *l, int value){
   if(l == NULL) return -1;
   if(l->size == 0) return -1;
 
   int index;
-  index = getPosition(l, value);
+  index = get_position(l, value);
   if(!index) {
     printf("error\n");
     return -1;
@@ -241,7 +240,7 @@ int removeElement(List *l, DataType value){
   return -1;
 }
 
-Boolean searchList(List* l, int index, DataType* adress){
+Boolean search_list(List* l, int index, int* mem_adress){
   if(index < 0 || index > l->size)    return false;
   if(l == NULL)   return false;
   if(l->size == 0)    return false;
@@ -250,12 +249,12 @@ Boolean searchList(List* l, int index, DataType* adress){
   for(int i=0; i<=index; i++){
     aux = aux->prox;
   }
-  *adress = aux->value;
+  *mem_adress = aux->value;
 
   return true;
 }
 
-Boolean hasElement(List* l, DataType value){
+Boolean has_element(List* l, int value){
   if(l == NULL) return false;
   Node* aux = l->sentinel->ant;
 
@@ -270,11 +269,11 @@ Boolean hasElement(List* l, DataType value){
   return true;
 }
 
-int getSize(List* l){
+int get_size(List* l){
   return l->size;
 }
 
-Boolean listToString(List* l, char* stringAdress){
+Boolean list_to_string(List* l, char* stringAdress){
   int pos = 0;
   char temp[100];
   Node* aux = l->sentinel->prox;

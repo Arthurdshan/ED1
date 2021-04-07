@@ -5,21 +5,20 @@
 #define N 5
 
 typedef enum boolean{false, true} Boolean;
-typedef int DataType;
 
 typedef struct {
-	DataType* vector;
+	int* vector;
 	int length;
 	int size;
 }Stack;
 
-Stack* createStack();
-void destroyStack(Stack* s);
-Boolean pushElement(Stack* s, DataType data);
-Boolean popElement(Stack* s, DataType* saida);
-Boolean topElement(Stack* s, DataType* saida);
-void print(Stack* s);
-int getSize(Stack* s);
-Stack* cloneStack(Stack* s);
-void revertStack(Stack* s);
-Boolean pushAllElements(Stack* s, DataType* vector, int lengthvector);
+Stack *create_stack();
+void destroy_stack(Stack *s);
+Boolean push_element(Stack *s, int data);
+Boolean pop_element(Stack *s, int* mem_adress);
+Boolean top_element(Stack *s, int* mem_adress);
+void print(Stack *s);
+int get_size(Stack *s);
+Stack *clone_stack(Stack *s);
+void revert_stack(Stack *s);
+Boolean push_all_elements(Stack *s, int* vector, int lengthvector);

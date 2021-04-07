@@ -2,35 +2,35 @@
 
 int main(){
 
-  List* l = createList();
-  insertNewElement(l, 1, 1);
+  List* l = create_List();
+  insert_new_element(l, 1, 1);
   print(l);
-  insertOnLastPosition(l, 2);
+  insert_on_last_position(l, 2);
   print(l);
-  insertOnLastPosition(l, 3);
+  insert_on_last_position(l, 3);
   print(l);
-  insertOnLastPosition(l, 4);
+  insert_on_last_position(l, 4);
   print(l);
-  insertOnLastPosition(l, 5);
+  insert_on_last_position(l, 5);
   print(l);
-  insertOnLastPosition(l, 6);
+  insert_on_last_position(l, 6);
   print(l);
-  insertOnLastPosition(l, 7);
+  insert_on_last_position(l, 7);
   print(l);
-  insertNewElement(l, 8, 2);
+  insert_new_element(l, 8, 2);
   print(l);
   
   int removed;
-  removeFromIndex(l, 3, &removed);
+  remove_from_index(l, 3, &removed);
   print(l);
 
-  int pos = getPosition(l, 1);
+  int pos = get_position(l, 1);
   
-  int pos1 = getPosition(l, 7);
+  int pos1 = get_position(l, 7);
   
-  int pos2 = getPosition(l, 10);
+  int pos2 = get_position(l, 10);
   
-  removed = removeElement(l, 10);
+  removed = remove_element(l, 10);
   
   if(removed == -1) printf("error.\n\n");
   else {
@@ -38,7 +38,7 @@ int main(){
     print(l);
   }
 
-  removed = removeElement(l, 8);
+  removed = remove_element(l, 8);
   if(removed == -1) printf("error.\n\n");
   else {
     printf("position of removed element : %d\t", removed);
@@ -46,13 +46,13 @@ int main(){
   }
   
   int adress;
-  searchList(l, 3, &adress);
+  search_list(l, 3, &adress);
   printf("the element %d is on position 3.\n\n", adress);
 
-  hasElement(l, 1);
-  hasElement(l, 505);
+  has_element(l, 1);
+  has_element(l, 505);
   
   char string[100];
-  listToString(l, string);
+  list_to_string(l, string);
   printf("%s\n", string);
 }

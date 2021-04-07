@@ -6,13 +6,13 @@
 
 priority_queue* create_queue(){
   priority_queue* q = (priority_queue*) malloc(sizeof(priority_queue));
-  q->array = (DataType*) calloc(T, sizeof(DataType));
+  q->array = (int*) calloc(T, sizeof(int));
   q->size = 0;
   q->length = T;
   return q;
 }
 
-Boolean insert_in_queue(priority_queue* q, DataType value){
+Boolean insert_in_queue(priority_queue* q, int value){
   if(q == NULL) return false;
   if(q->size == q->length) return false;
 
@@ -28,7 +28,7 @@ void promove_element(priority_queue* q, int leaf){
   promove_element(q, root(leaf));
 }
 
-void switch_elements(DataType* a, DataType* b){
+void switch_elements(int* a, int* b){
   int aux = *a;
   *a = *b;
   *b = aux;
@@ -67,7 +67,7 @@ void print(priority_queue* q){
   printf("]\n");
 }
 
-Boolean remove_from_queue(priority_queue* q, DataType* mem_adress){
+Boolean remove_from_queue(priority_queue* q, int* mem_adress){
   if(is_empty(q)) return false;
   
   *mem_adress = q->array[q->size - 1];
@@ -107,7 +107,7 @@ priority_queue* clone_queue(priority_queue* q){
   return fc;
 }
 
-Boolean insert_all_elements(priority_queue* q, DataType* array, int size){
+Boolean insert_all_elements(priority_queue* q, int* array, int size){
   if(q == NULL) return false;
 
   for(int i = 0; i < size; i++){

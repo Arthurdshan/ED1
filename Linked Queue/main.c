@@ -4,7 +4,7 @@ int main(){
 
   int removed;
 
-  Queue* q = create_queue();     
+  Queue *q = create_queue();     
   print(q);          
   insert_element(q, 1);                       
   insert_element(q, 2);                       

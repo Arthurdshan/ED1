@@ -21,7 +21,7 @@ int main(){
   print(cq);       
   printf("second queue:\n");    
   
-  DataType v[6] = {3,6,5,1,7};        
+  int v[6] = {3,6,5,1,7};        
 
   priority_queue* q2 = create_queue();
   

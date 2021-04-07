@@ -2,7 +2,7 @@
 
 int main(){
   
-  Stack* s = create_stack();
+  Stack *s = create_stack();
   
   push_element(s, 1);
   push_element(s, 2);

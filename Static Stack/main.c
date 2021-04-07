@@ -2,15 +2,15 @@
 
 int main(){
   
-  Stack* s = createStack();
+  Stack* s = create_stack();
   
-  pushElement(s, 1);
-  pushElement(s, 2);
-  pushElement(s, 3);
-  pushElement(s, 4);
-  pushElement(s, 5);
+  push_element(s, 1);
+  push_element(s, 2);
+  push_element(s, 3);
+  push_element(s, 4);
+  push_element(s, 5);
   
   print(s);
 
-  destroyStack(s);
+  destroy_stack(s);
 }

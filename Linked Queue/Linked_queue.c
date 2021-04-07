@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include "linked_queue.h"
 
-Queue* create_queue(){
+Queue *create_queue(){
   Queue *q = (Queue*) malloc(sizeof(Queue));
   if(q != NULL) {
     q->start = NULL;
@@ -24,7 +24,7 @@ void destroy_queue(Queue *q){
   }
 }
 
-Boolean insert_element(Queue *q, DataType data){
+Boolean insert_element(Queue *q, int data){
   if(q == NULL) return false;
   Node *node = (Node*) malloc (sizeof(Node));
   if(node == NULL) return false;
@@ -38,7 +38,7 @@ Boolean insert_element(Queue *q, DataType data){
   return true;
 }
 
-Boolean remove_element(Queue *q, DataType *mem_adress){
+Boolean remove_element(Queue *q, int *mem_adress){
   if(is_empty(q)) return false;
   Node *node = q->start;
   *mem_adress = node->data;
@@ -49,7 +49,7 @@ Boolean remove_element(Queue *q, DataType *mem_adress){
   return true;
 }
 
-Boolean first_element(Queue *q, DataType *mem_adress){
+Boolean first_element(Queue *q, int *mem_adress){
   if(is_empty(q)) return false;
   *mem_adress = q->start->data;
   return true;
@@ -89,7 +89,7 @@ void revert_queue(Queue *q){
   q->start = aux; 
 }
 
-Boolean insert_all_elements(Queue *q, DataType *vector, int size){
+Boolean insert_all_elements(Queue *q, int *vector, int size){
   if (q == NULL) return false;
 
   for(int i = 0; i < size; i++){

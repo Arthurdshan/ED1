@@ -19,7 +19,7 @@ void destroy_stack(Stack* s){
   free(s);
 }
 
-Boolean push_element(Stack* s, DataType data){
+Boolean push_element(Stack* s, int data){
   if(s == NULL) return false;
   
   Node *node = (Node*) malloc(sizeof(Node));
@@ -30,7 +30,7 @@ Boolean push_element(Stack* s, DataType data){
   return true;
 }
 
-Boolean pop_element(Stack *s, DataType *mem_adress){
+Boolean pop_element(Stack *s, int *mem_adress){
   if(s == NULL || s->top == NULL) return false;
 
   *mem_adress = s->top->data;
@@ -51,7 +51,7 @@ void print(Stack* s){
   printf("NULL\n");
 }
 
-Boolean top_element(Stack *s, DataType *mem_adress){
+Boolean top_element(Stack *s, int *mem_adress){
   if (s == NULL || s->top == NULL) return false;
 
   *mem_adress = s->top->data;
@@ -96,7 +96,7 @@ void revert_stack(Stack* s){
  * vetor = vector
  * size = vector size
 */
-Boolean push_all_elements(Stack *s, DataType *vetor, int size){
+Boolean push_all_elements(Stack *s, int *vetor, int size){
   if (s == NULL) return false;
 
   for(int i = 0; i < size; i++){

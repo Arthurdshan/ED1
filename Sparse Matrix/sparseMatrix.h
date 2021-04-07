@@ -1,8 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef enum boolean{FALSE, TRUE} Boolean;
-typedef int DataType;
+typedef enum boolean{false, true} Boolean;
 
 typedef struct node{
     int row;
@@ -22,17 +21,17 @@ typedef struct{
     int sizeOfColumns;    //number of matrix columns
 }Matrix;
 
-Matrix* createMatrix(int numberOfRows, int numberOfColumns);
-Boolean addValueToMatrix(Matrix* m, int row, int column, int data);
-int acessMatrixPosition(Matrix* m, int row, int column);
+Matrix* create_matrix(int number_of_rows, int number_of_columns);
+Boolean add_value_to_matrix(Matrix* m, int row, int column, int data);
+int acess_matrix_position(Matrix* m, int row, int column);
 void print(Matrix* m);
-Matrix* destroyMatrix(Matrix** m);
-void insertColumn(int row, int column, Node* node, Matrix* m);
-void insertRow(int row,int column , Node* node, Matrix* m);
-Node* findNodeColumn(Node* aux,int row, Node* sentinel);
-Node* findNodeRow(Node* aux,int column, Node* sentinel);
+Matrix* destroy_matrix(Matrix** matrixAdress);
+void insert_column(int row, int column, Node* node, Matrix* m);
+void insert_row(int row,int column , Node* node, Matrix* m);
+Node* find_node_column(Node* aux,int row, Node* sentinel);
+Node* find_node_row(Node* aux,int column, Node* sentinel);
 
-Matrix* destroyMatrix(Matrix** matrixAdress){
+Matrix* destroy_matrix(Matrix** matrixAdress){
     Matrix* m = *matrixAdress;
     if(m == NULL){
         printf("Matrix Inexistente!\n");
@@ -70,26 +69,26 @@ Matrix* destroyMatrix(Matrix** matrixAdress){
     *matrixAdress = NULL;
 }
 
-Matrix* createMatrix(int numberOfRows, int numberOfColumns){
+Matrix* create_matrix(int number_of_rows, int number_of_columns){
 
     Matrix* matrix = (Matrix*) malloc(sizeof(Matrix));
-    matrix->sizeOfColumns = numberOfColumns;
-    matrix->sizeOfRows = numberOfRows;
+    matrix->sizeOfColumns = number_of_columns;
+    matrix->sizeOfRows = number_of_rows;
 
-    Node** columns = (Node**) calloc(numberOfColumns, sizeof(DataType*));
+    Node** columns = (Node**) calloc(number_of_columns, sizeof(int*));
     matrix->columns = columns;
 
-    Node** rows = (Node**) calloc(numberOfRows, sizeof(DataType*));
+    Node** rows = (Node**) calloc(number_of_rows, sizeof(int*));
     matrix->rows = rows;
 
-    for(int i = 0; i < numberOfColumns; i++){
+    for(int i = 0; i < number_of_columns; i++){
         Node* sentinel = (Node*) malloc(sizeof(Node));
         sentinel->up = sentinel;
         sentinel->down = sentinel;
         columns[i] = sentinel;
     }
 
-    for(int i = 0; i < numberOfRows; i++){
+    for(int i = 0; i < number_of_rows; i++){
         Node* sentinel = (Node*) malloc(sizeof(Node));
         sentinel->left = sentinel;
         sentinel->right = sentinel;
@@ -99,16 +98,16 @@ Matrix* createMatrix(int numberOfRows, int numberOfColumns){
     return matrix;
 }
 
-int acessMatrixPosition(Matrix* m, int row, int column){
+int acess_matrix_position(Matrix* m, int row, int column){
     if(m == NULL) return 0;
     if(row >= m->sizeOfRows || row < 0) return 0;
     if(column >= m->sizeOfColumns || column < 0) return 0;
 
-    Node* aux1 = findNodeRow(m->rows[row]->right, column,m->rows[row]);
+    Node* aux1 = find_node_row(m->rows[row]->right, column,m->rows[row]);
     return aux1->data;
 }
 
-Node* findNodeColumn(Node* aux,int row, Node* sentinel){
+Node* find_node_column(Node* aux,int row, Node* sentinel){
     
     while(aux != sentinel && row > aux->row){
         aux = aux->down;
@@ -116,7 +115,7 @@ Node* findNodeColumn(Node* aux,int row, Node* sentinel){
     return aux;
 }
 
-Node* findNodeRow(Node* aux,int column, Node* sentinel){
+Node* find_node_row(Node* aux,int column, Node* sentinel){
     
     while(aux != sentinel && column > aux->column){
         aux = aux->right;
@@ -124,9 +123,9 @@ Node* findNodeRow(Node* aux,int column, Node* sentinel){
     return aux;
 }
 
-void insertColumn(int row, int column, Node* node, Matrix* m){
+void insert_column(int row, int column, Node* node, Matrix* m){
     Node* sentinel = m->columns[column];   
-    Node* aux = findNodeColumn(sentinel->down, row, sentinel);
+    Node* aux = find_node_column(sentinel->down, row, sentinel);
     
     if(aux != sentinel && row == aux->row){
         aux->data = node->data;
@@ -140,9 +139,9 @@ void insertColumn(int row, int column, Node* node, Matrix* m){
 
 }
 
-void insertRow(int row,int column, Node* node, Matrix* m){
+void insert_row(int row,int column, Node* node, Matrix* m){
     Node* sentinel = m->rows[row];
-    Node* aux = findNodeRow(sentinel->right,column, sentinel);
+    Node* aux = find_node_row(sentinel->right,column, sentinel);
 
     if(aux != sentinel && aux->column == column){
         aux->data = node->data;
@@ -155,17 +154,17 @@ void insertRow(int row,int column, Node* node, Matrix* m){
     }
 }
 
-Boolean addValueToMatrix(Matrix* m, int row, int column, int data){
-    if(m == NULL) return FALSE;
+Boolean add_value_to_matrix(Matrix* m, int row, int column, int data){
+    if(m == NULL) return false;
     
     Node* node = (Node*) malloc(sizeof(Node));
     node->data = data;
     node->column = column;
     node->row = row;
-    insertColumn(row,column, node, m);
-    insertRow(row,column, node, m);
+    insert_column(row,column, node, m);
+    insert_row(row,column, node, m);
 
-    return TRUE;
+    return true;
 }
 
 void print(Matrix* m){
