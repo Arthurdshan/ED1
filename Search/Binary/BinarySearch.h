@@ -1,0 +1,1 @@
+int binary_search(int* vector, int left, int right, int key);

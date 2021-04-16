@@ -1,0 +1,1 @@
+int linear_search(int* vector, int size, int key);
