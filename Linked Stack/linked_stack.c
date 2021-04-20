@@ -64,17 +64,17 @@ int get_size(Stack *s){
 
 Stack *clone_stack(Stack *s){
   Stack *clone = (Stack*) malloc(sizeof(Stack));
-  Node *caminho = s->top;
+  Node *traversal = s->top;
   Node *temp;
   for(int i = 0; i < s->size; i++){
     Node *data = (Node*) malloc(sizeof(Node));
-    data->data = caminho->data;
+    data->data = traversal->data;
       
     if(i == 0) clone->top = data;
     else temp->next = data;
       
     temp = data;
-    caminho = caminho->next;
+    traversal = traversal->next;
   }
   return clone;
 }
@@ -90,17 +90,11 @@ void revert_stack(Stack* s){
   s->top = p1->top;
 }
 
-/**
- * Gets a stack, a vector, and push all the elements from the vector to the stack.
- * s = stack
- * vetor = vector
- * size = vector size
-*/
-Boolean push_all_elements(Stack *s, int *vetor, int size){
+Boolean push_all_elements(Stack *s, int *vector, int size){
   if (s == NULL) return false;
 
   for(int i = 0; i < size; i++){
-    int aux = vetor[i];
+    int aux = vector[i];
     push_element(s, aux);
     s->size++;
   }

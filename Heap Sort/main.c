@@ -1,8 +1,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
-#include "boxOffice.h"
-#include "time.h"
+#include "box_office.h"
 
 int main(){
 

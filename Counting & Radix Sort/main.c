@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <time.h>
-#include "radixHeader.h"
+#include "radix_header.h"
 #include "vector.h"
-#include "mainData.h"
+#include "main_data.h"
 
 int main(){
   

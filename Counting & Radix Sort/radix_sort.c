@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "radixHeader.h"
+#include "radix_header.h"
 
 int max_radix(int *vector, int size){
   int max = vector[0];

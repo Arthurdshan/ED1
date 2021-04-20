@@ -22,4 +22,4 @@ void print(Stack *s);
 int get_size(Stack *s);
 Stack *clone_stack(Stack *s);
 void revert_stack(Stack *s);
-Boolean push_all_elements(Stack *s, int *vector, int lengthvector);
+Boolean push_all_elements(Stack *s, int *vector, int vector_length);

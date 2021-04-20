@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <limits.h>
-#include "mergeSort.h"
-#include "quickSort.h"
-#include "auxFunctions.h"
+#include "merge_sort.h"
+#include "quick_sort.h"
+#include "aux_functions.h"
 
 #define N 10000
 #define MAX_VALUE N * 100

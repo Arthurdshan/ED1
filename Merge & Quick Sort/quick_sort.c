@@ -1,7 +1,7 @@
-#include "quickSort.h"
-#include "auxFunctions.h"
+#include "quick_sort.h"
+#include "aux_functions.h"
 
-int partition(int* vector, int p, int r){
+int partition(int *vector, int p, int r){
   int x;
   int i, j;
   i = p - 1;
@@ -16,7 +16,7 @@ int partition(int* vector, int p, int r){
   return i + 1;
 }
 
-void quick_sort(int* vector, int left, int right){
+void quick_sort(int *vector, int left, int right){
   int pivot;
   if(left < right){
     pivot = partition(vector, left, right);

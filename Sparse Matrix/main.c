@@ -1,4 +1,6 @@
-#include "sparseMatrix.h"
+#include <stdio.h>
+
+#include "sparse_matrix.h"
 
 int main(){
     Matrix* matrix = create_matrix(4,4);

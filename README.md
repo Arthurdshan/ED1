@@ -1,5 +1,5 @@
 # DATA STRUCTURE PROJECT
-Welcome to this collection of data structure implementations!
+Welcome to this collection of C data structure implementations!
 
 Use this project to make your first contribution to an open source project on GitHub! If you find any issue please report it.
 
@@ -15,11 +15,16 @@ of this repository.
 
 - Priority Queue
 - Linked Stack
-- Static Stack
+- Contiguous Stack
 - Circular Queue
 - Linked Queue
 - Linked Sentinel List
 - Sparse Matrix
+- Sorting Algorithms 
+- Hashtable with Open Adressing
+- Chained Hashtable
+- Binary Search
+- Linear Search
 
 ## How to contribute?
 
@@ -48,3 +53,5 @@ git push origin branch-name
 ```
 6. Create a new pull request from your forked repository
 7. Star this repository to make it reach more people! Happy coding!
+
+(Do not forget to add your contribution to the List of Content).

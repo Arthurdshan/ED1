@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <limits.h>
-#include "mergeSort.h"
+#include "merge_sort.h"
 
 void merge_sort(int *vector, int left, int right){
   int middle;

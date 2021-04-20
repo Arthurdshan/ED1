@@ -1,12 +1,12 @@
 #include <stdio.h>
-#include "auxFunctions.h"
-#include "stdlib.h"
+#include "aux_functions.h"
+#include <stdlib.h>
 
-//returns a shuffled array based on seed parameter
-//and srand func
-int* random_vector(int size, int max, int seed) {
+/* returns a shuffled array based on seed parameter
+and srand func */
+int *random_vector(int size, int max, int seed) {
 
-  int* v = (int*) calloc(size, sizeof(int));
+  int *v = (int *) calloc(size, sizeof(int));
   srand(seed);
   for(int i = 0; i < size; i++) v[i] = rand() % max;
   
@@ -14,14 +14,14 @@ int* random_vector(int size, int max, int seed) {
 };
 
 //returns a sorted array from 0 to max size
-int* ordered_vector(int size, int max){
+int *ordered_vector(int size, int max){
 
   int* v = (int*) calloc(size, sizeof(int));
   for(int i = 0; i < size; i++) v[i] = i;
   return v;
 }
 
-void print_vector(int* vector, int length){  
+void print_vector(int *vector, int length){  
   printf("[");
   for(int i = 0; i < length; i++){
       printf("%d", vector[i]);
@@ -41,7 +41,7 @@ int max_value(int *vector, int initial_position, int final_position){
   return biggerElementIndex;
 };
 
-void switch_elements(int* vector, int position, int next_position){
+void switch_elements(int *vector, int position, int next_position){
   int aux = vector[position];
   vector[position] = vector[next_position];
   vector[next_position] = aux;
