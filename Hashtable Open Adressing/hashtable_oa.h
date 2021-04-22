@@ -17,6 +17,7 @@ typedef struct element {
 // HTOA stands for hash table open adressing
 typedef struct HTOA {
     int m;
+    int n;
     Element *table;
 } HTOA;
 

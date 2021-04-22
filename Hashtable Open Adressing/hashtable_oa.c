@@ -9,6 +9,7 @@ HTOA* HTOA_create(int m){
     HTOA *new_ht = (HTOA*)malloc(sizeof(HTOA));
     new_ht->table = (Element*)malloc(sizeof(Element) * m);
     new_ht->m = m;
+    new_ht->n = 0;
     for(int i = 0; i < m; i++)
         new_ht->table[i].status = empty;
     return new_ht;
@@ -21,14 +22,17 @@ int HTOA_insert(HTOA *HT, int key, int value){
     initial_h = h;
 
     while(HT->table[h].status == occupied){
-        if(HT->table[h].key == key){
-            break;
-        }
+        if(HT->table[h].key == key) break;
+
         k++;
+
         h = HTOA_Hash(HT, key, k);
+        
         if (h == initial_h) return -1;    
     }
 
+    if(!(HT->table[h].key == key)) HT->n++;
+    
     HT->table[h].key = key;
     HT->table[h].value = value;
     HT->table[h].status = occupied;
