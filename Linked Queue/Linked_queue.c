@@ -17,7 +17,7 @@ void destroy_queue(Queue *q){
     Node *aux;
     while(q->start != NULL){
       aux = q->start;
-      q->start = q->start->prox;
+      q->start = q->start->next;
       free(aux);
     }
     free(q);
@@ -29,10 +29,10 @@ Boolean insert_element(Queue *q, int data){
   Node *node = (Node*) malloc (sizeof(Node));
   if(node == NULL) return false;
   node->data = data;
-  node->prox = NULL;
+  node->next = NULL;
 
   if(is_empty(q)) q->start = node;
-  else q->end->prox = node;
+  else q->end->next = node;
   q->end = node;
   q->size++;
   return true;
@@ -42,7 +42,7 @@ Boolean remove_element(Queue *q, int *mem_adress){
   if(is_empty(q)) return false;
   Node *node = q->start;
   *mem_adress = node->data;
-  q->start = q->start->prox;
+  q->start = q->start->next;
   if(q->start == NULL) q->end = NULL;
   free(node);
   q->size--;
@@ -70,7 +70,7 @@ void print(Queue *q){
   Node *aux = q->start;
   for(int i = 0; i < q->size; i++){
     printf("%d -> ",aux->data);
-    aux = aux->prox;
+    aux = aux->next;
   }
   printf("NULL\n");
 }
@@ -81,8 +81,8 @@ void revert_queue(Queue *q){
   Node *aux1 = q->start; 
   Node *aux2 = NULL; 
   while (aux1 != NULL) { 
-    aux2 = aux1->prox; 
-    aux1->prox = aux; 
+    aux2 = aux1->next; 
+    aux1->next = aux; 
     aux = aux1; 
     aux1 = aux2; 
   } 

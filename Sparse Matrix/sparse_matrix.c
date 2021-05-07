@@ -3,44 +3,6 @@
 
 #include "sparse_matrix.h"
 
-Matrix* destroy_matrix(Matrix** matrix_adress){
-    Matrix* m = *matrix_adress;
-    if(m == NULL){
-        printf("Matrix Inexistente!\n");
-        return NULL;
-    }
-    int i = 0;
-    Node* sentinel = m->rows[i];
-
-    while(i < m->size_of_rows){
-        if(sentinel != sentinel->right){
-            Node* aux = sentinel->right;
-            while(aux != sentinel){
-                sentinel->right = aux->right;
-                free(aux);
-                aux = sentinel->right;
-            }
-        }
-        sentinel = m->rows[++i];
-    }
-
-
-    for(int i = 0; i < m->size_of_rows; i++){
-        Node* aux = m->rows[i];
-        free(aux);
-    }
-
-    for(int i = 0; i < m->size_of_columns; i++){
-        Node* aux = m->columns[i];
-        free(aux);
-    }
-
-    free(m->columns);
-    free(m->rows);
-    free(m);
-    *matrix_adress = NULL;
-}
-
 Matrix* create_matrix(int number_of_rows, int number_of_columns){
 
     Matrix* matrix = (Matrix*) malloc(sizeof(Matrix));
@@ -157,4 +119,42 @@ void print(Matrix *m){
         printf("\n\n");
     }
     printf("\n");
+}
+
+Matrix* destroy_matrix(Matrix** matrix_adress){
+    Matrix* m = *matrix_adress;
+    if(m == NULL){
+        printf("Matrix Inexistente!\n");
+        return NULL;
+    }
+    int i = 0;
+    Node* sentinel = m->rows[i];
+
+    while(i < m->size_of_rows){
+        if(sentinel != sentinel->right){
+            Node* aux = sentinel->right;
+            while(aux != sentinel){
+                sentinel->right = aux->right;
+                free(aux);
+                aux = sentinel->right;
+            }
+        }
+        sentinel = m->rows[++i];
+    }
+
+
+    for(int i = 0; i < m->size_of_rows; i++){
+        Node* aux = m->rows[i];
+        free(aux);
+    }
+
+    for(int i = 0; i < m->size_of_columns; i++){
+        Node* aux = m->columns[i];
+        free(aux);
+    }
+
+    free(m->columns);
+    free(m->rows);
+    free(m);
+    *matrix_adress = NULL;
 }

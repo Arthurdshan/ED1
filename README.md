@@ -5,7 +5,6 @@ Use this project to make your first contribution to an open source project on Gi
 
 Hope this helps. :)
 
-![data structures](data_structures.jpg)
 ## Why this repository? 
 
 Learning Data Structure and getting started with open source contribution are the two main goals
@@ -18,7 +17,6 @@ of this repository.
 - Contiguous Stack
 - Circular Queue
 - Linked Queue
-- Linked Sentinel List
 - Sparse Matrix
 - Sorting Algorithms 
 - Hashtable with Open Adressing

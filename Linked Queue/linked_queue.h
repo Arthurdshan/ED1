@@ -2,7 +2,7 @@ typedef enum boolean{false, true} Boolean;
 
 typedef struct node{
 	int data;
-	struct node *prox;
+	struct node *next;
 }Node;
 
 typedef struct {
